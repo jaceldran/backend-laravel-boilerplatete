@@ -1,56 +1,33 @@
-# Laravel backend
+# Monolito Laravel Inertia Svelte
 
-*Boilerpate* para un proyecto de *backend* con Laravel.
+Instalar dependencias php (inertiajs/inertia)
 
+````
+composer install / update
+````
 
-## Caraterísticas básicas
+Para poder modificar la carpeta por defecto de inertia.
 
-- `app/Traits/Newable` para instanciar cualquier clase usando `MyClass::new()` con o sin argumentos;
-
-- `app/Traits/GenerateUuid` para asignar claves primarias basadas en UUID en lugar de autoincrementales.
-
-- Ajuste de **CORS** en el archivo de configuración `config/cors.php` mediante el registro de los orígenes permitidos.
-
-    - http://localhost:5173 (URL por defecto para `npm run dev`)
-    - http://localhost:4173 (URL por defecto para `npm run preview`)
-
-- - Rutas de login/logout vía API en el archivo `routes/api.php` invocando a los controladores correspondients:
-
-    - `api/login` LoginController
-    - `api/logout` LogoutController
+php artisan vendor:publish --provider="Inertia\ServiceProvider"
 
 
+Instalar dependencias js
 
-## Instalación en subdirectorio
 
-Si la aplicación laravel se instala en un subdirectorio del raiz entonces añadir un `.htaccess` con el contenido:
+````
+npm install
+````
 
-```
-RewriteEngine On
-RewriteRule ^$ public/ [L]
-RewriteCond %{REQUEST_FILENAME} !-f
-RewriteCond %{REQUEST_FILENAME} !-d
-RewriteRule ^(.*)$ public/$1 [L]
-```
-Y, en `app/Providers/RouteServiceProvider.php`, modificar el método boot añadiendo prefijos a los middleware de rutas api y web:
+Si la página de inicio sigue mostrando el welcome por defecto de Laravel
 
-```php
-public function boot(): void
-    {
-        $subdirectory = 'backend';
+````
+php artisah route:clear
+````
 
-        RateLimiter::for('api', function (Request $request) {
-            return Limit::perMinute(60)->by($request->user()?->id ?: $request->ip());
-        });
+## Características
 
-        $this->routes(function () {
-            Route::middleware('api')
-                ->prefix($subdirectory . '/api')
-                ->group(base_path('routes/api.php'));
+- Carpeta utils para agregar utilidades diversas y centralizarlas en la librería `utils.js`.
 
-            Route::middleware('web')
-                ->prefix($subdirectory)
-                ->group(base_path('routes/web.php'));
-        });
-    }
-```
+- Componente de botón para alternar modo dark/light.
+
+- Instalación de Highcharts con temas personalizables de muestra: darkTheme y lightTheme.

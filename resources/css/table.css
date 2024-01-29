@@ -1,0 +1,6 @@
+table {
+    @apply w-full;
+}
+td{
+    @apply p-3;
+}
