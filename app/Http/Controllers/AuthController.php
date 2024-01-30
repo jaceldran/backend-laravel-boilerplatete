@@ -20,9 +20,6 @@ class AuthController extends Controller
         $credentials = $request->only(['email', 'password']);
 
         if (Auth::guard('web')->attempt($credentials, true)) {
-            $user = Auth::guard('web')->user();
-            $token = $user->createToken('api')->plainTextToken;
-
             return Inertia::location('admin/dashboard');
         }
 
