@@ -1,5 +1,10 @@
 <script>
+    import { page } from "@inertiajs/svelte";
+    import FlashMessage from "@/components/FlashMessage.svelte";
     import DarkModeButton from "@/components/DarkModeButton.svelte";
+    import { jsonRender } from "@/utils";
+
+    const user = $page.props.user;
 </script>
 
 <div class="layout">
@@ -13,6 +18,8 @@
     </header>
 
     <main>
+        <FlashMessage />
+        <pre class="m-4 p-4 border">{jsonRender(user)}</pre>
         <slot />
     </main>
 

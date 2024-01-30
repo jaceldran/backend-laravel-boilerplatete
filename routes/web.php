@@ -3,10 +3,20 @@
 use Inertia\Inertia;
 
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\AuthController;
 use App\Http\Controllers\FakeSaleController;
+use App\Http\Controllers\DashboardController;
 
 Route::resource('sales', FakeSaleController::class);
 
+Route::get('/login', [AuthController::class, 'form'])->name('login');
+Route::get('/logout', [AuthController::class, 'logout'])->name('auth.logout');
+Route::post('/login', [AuthController::class, 'login'])->name('auth.login');
+
 Route::get('/', function () {
     return Inertia::render('Welcome');
+});
+
+Route::middleware('auth:sanctum')->group(function () {
+    Route::get('/admin/dashboard', DashboardController::class);
 });

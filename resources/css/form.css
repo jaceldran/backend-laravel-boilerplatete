@@ -1,23 +1,23 @@
-input {
-    @apply w-full block font-medium border h-10 px-3   text-slate-600;
-}
+  /* input {
+    @apply h-12 px-2;
+} */
 
-select, option {
+/* select, option {
     @apply w-full block font-medium border h-10 px-3 text-slate-600 bg-transparent;
-}
+} */
 
-label {
+/* label {
     @apply mb-1 block font-medium text-slate-400;
-}
+} */
 
-.amount.debit {
+/* .amount.debit {
     @apply text-green-600;
-}
+} */
 
-.amount.credit {
+/* .amount.credit {
     @apply text-red-600;
-}
+} */
 
-[disabled] {
+/* [disabled] {
     @apply text-slate-400 bg-slate-100 cursor-not-allowed;
-}
+} */
