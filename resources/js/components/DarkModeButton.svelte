@@ -8,12 +8,12 @@
     }
 </script>
 
-<button class="p-4 flex" on:click={toggle}>
+<button class="flex {$$props.class}" on:click={toggle}>
     {#if $colorScheme === "light"}
-        <Fa class="text-stone-500" icon={faMoon} size="lg" />
+        <Fa icon={faMoon} size="lg" />
     {/if}
 
     {#if $colorScheme === "dark"}
-        <Fa class="text-white" icon={faSun} size="lg" />
+        <Fa icon={faSun} size="lg" />
     {/if}
 </button>

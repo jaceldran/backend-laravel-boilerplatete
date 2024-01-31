@@ -1,11 +1,17 @@
 <script>
-    import Main from "@/layouts/Login.svelte";
-
-    import Fa from "svelte-fa";
+    import Main from "@/layouts/App.svelte";
+    import Icon from "@/components/Icon.svelte";
     import { faEnvelope, faKey } from "@fortawesome/free-solid-svg-icons";
     import { router } from "@inertiajs/svelte";
 
     export let errors;
+
+    const controlColors = "border dark:border-neutral-600";
+    const inputColors =
+        "bg-neutral-100 dark:text-neutral-300 dark:bg-neutral-600";
+    const iconColors =
+        "bg-neutral-100 dark:text-neutral-300 dark:bg-neutral-600";
+    const buttonColors = "bg-neutral-500 text-white dark:bg-neutral-600";
 
     const form = {
         email: "",
@@ -21,71 +27,78 @@
     <title>Login</title>
 </svelte:head>
 
-<Main>
+<Main context="login">
     <form on:submit|preventDefault={submit}>
         <section>
-            <div class="flex items-center">
-                <label for="input-email"> Email </label>
-                <div class="icon-container">
-                    <Fa icon={faEnvelope} size="lg" class="text-stone-500" />
-                </div>
+            <div class="input-control {controlColors}">
+                <span class="icon {iconColors}">
+                    <Icon icon={faEnvelope} />
+                </span>
                 <input
                     id="input-email"
                     type="email"
                     name="email"
                     placeholder="Email"
-                    class="bg-stone-200"
+                    class={inputColors}
                     bind:value={form.email}
                 />
             </div>
             {#if errors.email}
-                <div class="text-red-600 text-sm ml-24">{errors.email}</div>
+                <div class="input-error">{errors.email}</div>
             {/if}
+        </section>
 
-            <div class="flex items-center">
-                <label for="input-password"> Password </label>
-                <div class="icon-container">
-                    <Fa icon={faKey} size="lg" class="text-stone-500" />
-                </div>
+        <section>
+            <div class="input-control {controlColors}">
+                <span class="icon {iconColors}">
+                    <Icon icon={faKey} />
+                </span>
                 <input
-                    id="input-password"
+                    id="input-passworkd"
                     type="password"
                     name="password"
+                    class={inputColors}
                     placeholder="Password"
-                    class="bg-stone-200"
                     bind:value={form.password}
                 />
             </div>
             {#if errors.password}
-                <div class="text-red-600 text-sm ml-24">{errors.password}</div>
+                <div class="input-error">{errors.password}</div>
             {/if}
+        </section>
 
-            <div class="mt-1">
-                <button type="submit" class="bg-stone-700 text-stone-100">
-                    <span>Login</span>
-                </button>
-            </div>
+        <section>
+            <p class="py-2 flex justify-between items-center">
+                <button type="submit" class={buttonColors}> Login </button>
+                <a href="/register"> Register </a>
+            </p>
         </section>
     </form>
 </Main>
 
 <style>
     form {
-        @apply h-svh flex flex-col items-center justify-center bg-stone-300 font-medium;
-    }
-    input {
-        @apply w-full h-10 px-3 outline-none;
-    }
-    .icon-container {
-        @apply bg-stone-200 h-10 flex flex-col justify-center pl-3;
+        @apply h-5/6 flex flex-col gap-4 items-center justify-center font-medium;
     }
     section {
-        @apply mx-auto flex flex-col gap-2 w-96;
+        @apply flex flex-col w-72;
     }
-    label {
-        @apply h-6 inline-block w-36 text-stone-400;
+    .input-control {
+        @apply shadow-sm flex items-center rounded;
+    }
+    .input-control > input {
+        @apply w-full h-12 outline-none;
+    }
+    .input-control > .icon {
+        @apply h-12 px-3 flex justify-center items-center;
+    }
+    .input-error {
+        @apply text-red-600 text-sm;
     }
     button {
-        @apply mt-2 h-10 px-4 self-end rounded bg-stone-700 text-stone-100;
+        @apply h-12 px-4 w-28 rounded font-bold text-sm uppercase duration-200;
+    }
+    button:hover {
+        @apply tracking-[4px];
     }
 </style>

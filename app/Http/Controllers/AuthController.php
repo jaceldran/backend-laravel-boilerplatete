@@ -20,7 +20,7 @@ class AuthController extends Controller
         $credentials = $request->only(['email', 'password']);
 
         if (Auth::guard('web')->attempt($credentials, true)) {
-            return Inertia::location('admin/dashboard');
+            return Inertia::location('/dashboards');
         }
 
         return redirect()->route('login')->with('warning', 'Las credenciales proporcionadas no son válidas');

@@ -6,9 +6,10 @@ return [
     'allowed_methods' => ['*'],
 
     'allowed_origins' => [
-        'https://backend-laravel.local',
+        'http://[::1]:5173',
         'http://localhost:5173',
         'http://localhost:4173',
+        'https://backend-laravel.local',
     ],
 
     'allowed_origins_patterns' => ['*'],

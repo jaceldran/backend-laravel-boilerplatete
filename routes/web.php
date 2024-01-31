@@ -14,9 +14,13 @@ Route::get('/logout', [AuthController::class, 'logout'])->name('auth.logout');
 Route::post('/login', [AuthController::class, 'login'])->name('auth.login');
 
 Route::get('/', function () {
-    return Inertia::render('Welcome');
+    return redirect('/dashboards');
+    // return Inertia::render('Welcome');
 });
 
 Route::middleware('auth:sanctum')->group(function () {
-    Route::get('/admin/dashboard', DashboardController::class);
+    Route::get('/dashboards/marketing', [DashboardController::class, 'marketing'])
+        ->name('dashboards.marketing');
+    Route::get('/dashboards', [DashboardController::class, 'index'])
+        ->name('dashboards.index');
 });
