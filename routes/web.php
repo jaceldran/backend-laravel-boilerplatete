@@ -14,8 +14,7 @@ Route::get('/logout', [AuthController::class, 'logout'])->name('auth.logout');
 Route::post('/login', [AuthController::class, 'login'])->name('auth.login');
 
 Route::get('/', function () {
-    return redirect('/dashboards');
-    // return Inertia::render('Welcome');
+    return Inertia::render('Home');
 });
 
 Route::middleware('auth:sanctum')->group(function () {

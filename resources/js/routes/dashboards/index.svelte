@@ -1,11 +1,54 @@
 <script>
     import Main from "@/layouts/App.svelte";
     import { inertia, page } from "@inertiajs/svelte";
-    import { jsonRender } from "@/utils.js";
+    import { colorScheme } from "@/stores/colorScheme.js";
+    import Breadcrumb from "@/components/ui/Breadcrumb.svelte";
+    import Navigation from "@/components/ui/Navigation.svelte";
+    import Icon from "@/components/Icon.svelte";
+    import { faArrowRight } from "@fortawesome/free-solid-svg-icons";
+
+    const links = [{ text: "Dashboards", href: "/dashboards" }];
+
+    const routes = [
+        { text: "Marketing", href: "/dashboards/marketing", active: false },
+        { text: "Académico", href: "/dashboards/marketing", active: false },
+        { text: "Financiero", href: "/dashboards/marketing", active: false },
+    ];
 </script>
 
-<Main class="h-screen flex flex-col items-center justify-center font-medium">
-    <nav>
-        <a use:inertia href="/dashboards/marketing"> Marketing </a>
+<Main>
+    <Breadcrumb {links} class="py-2">
+        <Navigation class="horizontal" {routes} />
+    </Breadcrumb>
+
+    <nav class={$colorScheme}>
+        <a use:inertia href="/dashboards/marketing">
+            <Icon class="-mt-1" icon={faArrowRight} />
+            <span class=" font-semibold"> Marketing</span>
+        </a>
+        <a use:inertia href="/dashboards/marketing">
+            <Icon class="-mt-1" icon={faArrowRight} />
+            <span class=" font-semibold">Académico</span>
+        </a>
+        <a use:inertia href="/dashboards/marketing">
+            <Icon class="-mt-1" icon={faArrowRight} />
+            <span class=" font-semibold">Financiero</span>
+        </a>
     </nav>
 </Main>
+
+<style>
+    nav {
+        @apply rounded shadow-sm mt-4 bg-neutral-100;
+    }
+    a {
+        @apply flex items-center gap-3 p-4;
+    }
+    a:hover {
+        @apply bg-neutral-200;
+    }
+
+    nav.dark a:hover {
+        @apply bg-neutral-700;
+    }
+</style>

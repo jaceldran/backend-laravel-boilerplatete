@@ -1,7 +1,7 @@
 <script>
     import { colorScheme } from "@/stores/colorScheme.js";
     import Fa from "svelte-fa";
-    import { faMoon, faSun } from "@fortawesome/free-solid-svg-icons";
+    import { faMoon, faSun } from "@fortawesome/free-regular-svg-icons";
 
     function toggle() {
         colorScheme.toggle();

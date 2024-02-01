@@ -35,7 +35,7 @@
         <div class=" {showOptions ? 'block' : 'hidden'}">
             <menu class="menu {menuApply}">
                 <span
-                    class="px-2 py-2 font-semibold text-sm text-fuchsia-700 tracking-tighter uppercase"
+                    class="pl-2 mt-2 font-semibold text-xs text-violet-500 tracking-tighter uppercase"
                     >{user.name}</span
                 >
                 <a class="option {optionApply}" href="/user">Cuenta</a>
@@ -54,13 +54,12 @@
     nav {
         @apply h-14 px-4 flex flex-col justify-center items-center relative;
     }
-    /* -translate-x-2/3 -translate-x-[176px]  -translate-y-2*/
     .menu {
         @apply shadow
         absolute -translate-x-[85%] top-full w-44
         flex flex-col;
     }
     .option {
-        @apply py-3 px-4;
+        @apply py-2 px-3;
     }
 </style>

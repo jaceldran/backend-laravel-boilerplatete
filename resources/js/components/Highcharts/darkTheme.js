@@ -7,11 +7,11 @@ export default {
         enabled: false,
     },
     chart: {
-        backgroundColor: tailwind.stone[700],
+        backgroundColor: tailwind.neutral[800],
     },
     title: {
         style: {
-            color: tailwind.stone[300],
+            color: tailwind.neutral[400],
             fontSize: '1.25rem',
             fontWeight: '400',
         }
@@ -34,7 +34,7 @@ export default {
         series: {
             animation: true,
             dataLabels: {
-                color: tailwind.stone[300],
+                color: tailwind.neutral[400],
                 style: {
                     textOutline: "none",
                 }

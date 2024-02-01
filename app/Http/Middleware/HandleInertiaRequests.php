@@ -43,24 +43,30 @@ class HandleInertiaRequests extends Middleware
                 'warning' => fn() => $request->session()->get('warning'),
             ],
             'user' => fn() => $request->user(),
+            'route' => fn() => '/' . $request->route()->uri,
             'mainNavigation' => fn() => $this->mainNavigation($request),
         ]);
     }
 
     private function mainNavigation(Request $request): array
     {
-        $routes['/'] = ['name' => 'Inicio'];
-
-        if ($request->user()) {
-            $routes['/dashboards'] = ['name' => 'Dashboards'];
+        if (!$request->user()) {
+            return [];
         }
 
-        $requestUri = '/' . $request->route()->uri;
+        $uri = '/' . $request->route()->uri;
+
+        $routes['/enrolments'] = ['text' => 'Enrolments'];
+        $routes['/payments'] = ['text' => 'Payments'];
+        $routes['/diplomas'] = ['text' => 'Diplomas'];
+        $routes['/logs'] = ['text' => 'Logs'];
+        $routes['/dashboards'] = ['text' => 'Dashboards'];
 
         foreach ($routes as $routeUri => &$route) {
-            $route['active'] = $requestUri === $routeUri;
+            $route['href'] = $routeUri;
+            $route['active'] = str_starts_with($uri, $routeUri);
         }
 
-        return $routes;
+        return array_values($routes);
     }
 }

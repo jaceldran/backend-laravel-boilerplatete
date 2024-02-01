@@ -16,7 +16,7 @@ export default {
     },
     title: {
         style: {
-            color: tailwind.stone[700],
+            color: tailwind.neutral[700],
             fontSize: '1.25rem',
             fontWeight: '400',
         }
@@ -39,7 +39,7 @@ export default {
         series: {
             animation: true,
             dataLabels: {
-                color: tailwind.stone[500],
+                color: tailwind.neutral[600],
             },
             style: {
                 textOutline: "none",

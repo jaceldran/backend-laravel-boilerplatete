@@ -1,8 +1,7 @@
 <script>
     import { onMount } from "svelte";
     import { colorScheme } from "@/stores/colorScheme.js";
-    import tailwind from "tailwindcss/colors";
-    import { jsonRender } from "@/utils.js";
+    import { numberFormat } from "@/utils.js";
     import Highcharts from "highcharts";
     import darkTheme from "@/components/Highcharts/darkTheme.js";
     import lightTheme from "@/components/Highcharts/lightTheme.js";
@@ -20,35 +19,8 @@
             type: "pie",
         },
         title: { text: title },
-        tooltip: {
-            valueSuffix: "%",
-        },
-        // plotOptions: {
-        //     series: {
-        //         allowPointSelect: true,
-        //         cursor: "pointer",
-        //         dataLabels: [
-        //             {
-        //                 enabled: true,
-        //                 distance: 20,
-        //             },
-        //             {
-        //                 enabled: true,
-        //                 distance: -40,
-        //                 format: "{point.percentage:.1f}%",
-        //                 style: {
-        //                     fontSize: ".8em",
-        //                     textOutline: "none",
-        //                     opacity: 0.7,
-        //                 },
-        //                 filter: {
-        //                     operator: ">",
-        //                     property: "percentage",
-        //                     value: 10,
-        //                 },
-        //             },
-        //         ],
-        //     },
+        // tooltip: {
+        //     valueSuffix: "%",
         // },
         series: [data],
     };
@@ -74,4 +46,22 @@
     });
 </script>
 
-<div {id} class={apply}></div>
+<div {id} class="h-full w-full {$$props.class}"></div>
+
+<!-- <section class="grid grid-cols-3 shadow-md mt-4 mx-auto w-2/3 text-sm">
+    {#each data.data as item}
+        <div class="rowitem">{item.name}</div>
+        <div class="rowitem text-right">
+            {numberFormat(item.y)}
+        </div>
+        <div class="rowitem text-right">
+            {numberFormat(item.y, { compact: true })}
+        </div>
+    {/each}
+</section>
+
+<style>
+    .rowitem {
+        @apply border-b p-1;
+    }
+</style> -->

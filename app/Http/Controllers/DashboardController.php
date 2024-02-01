@@ -20,17 +20,17 @@ class DashboardController
             ->selectRaw('customer')
             ->selectRaw('category')
             ->selectRaw('product')
-            ->selectRaw('amount')
+            ->selectRaw('amount/100 as amount')
             ->orderBy('date', 'desc');
 
         $salesByProduct = clone (FakeSale::query())
             ->selectRaw('product')
-            ->selectRaw('sum(amount) as amount')
+            ->selectRaw('sum(amount)/1 as amount')
             ->groupBy('product');
 
         $salesByCategory = clone (FakeSale::query())
             ->selectRaw('category')
-            ->selectRaw('sum(amount) as amount')
+            ->selectRaw('sum(amount)/1 as amount')
             ->groupBy('category');
 
         $hc = HighCharts::new();

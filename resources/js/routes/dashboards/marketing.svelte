@@ -1,6 +1,8 @@
 <script>
     // import { onMount } from "svelte";
     import PieChart from "@/components/Highcharts/PieChart.svelte";
+    import Breadcrumb from "@/components/ui/Breadcrumb.svelte";
+    import Navigation from "@/components/ui/Navigation.svelte";
     // import Highcharts from "highcharts";
     import Main from "@/layouts/App.svelte";
     // import Pagination from "@/components/Pagination.svelte";
@@ -9,24 +11,29 @@
     //export let sales;
     export let salesByProduct;
     export let salesByCategory;
+
+    const links = [
+        { text: "Dashboards", href: "/dashboards" },
+        { text: "Marketing", href: "/dashboards/marketing" },
+    ];
+
+    const routes = [
+        { text: "Marketing", href: "/dashboards/marketing", active: true },
+        { text: "Académico", href: "/dashboards/marketing", active: false },
+        { text: "Financiero", href: "/dashboards/marketing", active: false },
+    ];
 </script>
 
 <Main>
-    <div class="grid grid-cols-2">
-        <div class="">
-            <PieChart
-                title="Ventas por producto"
-                data={salesByProduct}
-                apply="h-76"
-            />
-        </div>
-        <div class="">
-            <PieChart
-                title="Ventas por categoría"
-                data={salesByCategory}
-                apply="h-76"
-            />
-        </div>
+    <Breadcrumb {links} class="py-2">
+        <Navigation class="horizontal" {routes} />
+    </Breadcrumb>
+
+    <div
+        class="flex items-center justify-center w-full outline outline-neutral-200 p-4"
+    >
+        <PieChart title="Ventas por producto" data={salesByProduct} />
+        <PieChart title="Ventas por categoría" data={salesByCategory} />
     </div>
 
     <!-- <div class="table">
