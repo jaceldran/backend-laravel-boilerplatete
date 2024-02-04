@@ -3,7 +3,7 @@
     import PieChart from "@/components/Highcharts/PieChart.svelte";
     // import Highcharts from "highcharts";
     import Main from "@/layouts/App.svelte";
-    import Pagination from "@/components/Pagination.svelte";
+    import Pagination from "@/components/ui/Pagination.svelte";
     import { dateFormat, jsonRender, moneyFormat } from "@/utils.js";
 
     export let sales;

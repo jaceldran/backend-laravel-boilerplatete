@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="es" class="antialiased font-light">
+<html lang="es">
 
 <head>
     <title>Laravel-Inertia-Svelte</title>
@@ -9,7 +9,13 @@
     @inertiaHead
 </head>
 
-<body class="dark:bg-neutral-900 dark:text-neutral-500 bg-neutral-50 text-neutral-600 text-normal">
+{{-- dark:bg-[#241b2f] --}}
+
+<body
+    class="antialiased
+    dark:text-neutral-400
+    bg-neutral-50 text-neutral-600 text-normal
+    dark:bg-gradient-to-bl  dark:from-neon-dark-darkest dark:to-neon-dark-darker">
     @inertia
 </body>
 

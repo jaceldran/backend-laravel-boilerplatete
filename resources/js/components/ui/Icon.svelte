@@ -3,6 +3,7 @@
     import { config, dom, library } from "@fortawesome/fontawesome-svg-core";
 
     export let icon;
+    export let size;
 
     // Configurar FontAwesome
     config.autoReplaceSvg = "nest";
@@ -14,7 +15,7 @@
     dom.watch();
 </script>
 
-<Fa {icon} class={$$props.class} />
+<Fa {icon} {size} class={$$props.class} />
 
 <style>
     .fa-spin {

@@ -1,19 +1,19 @@
 <script>
     import { colorScheme } from "@/stores/colorScheme.js";
-    import Fa from "svelte-fa";
-    import { faMoon, faSun } from "@fortawesome/free-regular-svg-icons";
+    import IconBadge from "@/components/ui/IconBadge.svelte";
+    import { faMoon, faSun } from "@fortawesome/free-solid-svg-icons";
 
     function toggle() {
         colorScheme.toggle();
     }
 </script>
 
-<button class="flex {$$props.class}" on:click={toggle}>
+<button class={$$props.class} on:click={toggle}>
     {#if $colorScheme === "light"}
-        <Fa icon={faMoon} size="lg" />
+        <IconBadge icon={faMoon} class="bg-transparent" />
     {/if}
 
     {#if $colorScheme === "dark"}
-        <Fa icon={faSun} size="lg" />
+        <IconBadge icon={faSun} class="dark:bg-transparent" />
     {/if}
 </button>

@@ -1,6 +1,7 @@
 <script>
     import { inertia } from "@inertiajs/svelte";
     import { colorScheme } from "@/stores/colorScheme.js";
+    import IconBadge from "@/components/ui/IconBadge.svelte";
     import Fa from "svelte-fa";
     import {
         faUserAstronaut,
@@ -27,9 +28,9 @@
     <nav on:mouseenter={openMenu} on:mouseleave={closeMenu}>
         <button class={$$props.class}>
             {#if $colorScheme === "dark"}
-                <Fa icon={faUserNinja} size="lg" />
+                <IconBadge icon={faUserNinja} class="dark:bg-transparent" />
             {:else}
-                <Fa icon={faUserAstronaut} size="lg" />
+                <IconBadge icon={faUserAstronaut} class="bg-transparent" />
             {/if}
         </button>
         <div class=" {showOptions ? 'block' : 'hidden'}">

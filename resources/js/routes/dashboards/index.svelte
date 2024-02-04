@@ -4,7 +4,7 @@
     import { colorScheme } from "@/stores/colorScheme.js";
     import Breadcrumb from "@/components/ui/Breadcrumb.svelte";
     import Navigation from "@/components/ui/Navigation.svelte";
-    import Icon from "@/components/Icon.svelte";
+    import Icon from "@/components/ui/Icon.svelte";
     import { faArrowRight } from "@fortawesome/free-solid-svg-icons";
 
     const links = [{ text: "Dashboards", href: "/dashboards" }];
@@ -38,17 +38,17 @@
 </Main>
 
 <style>
-    nav {
+    /* nav {
         @apply rounded shadow-sm mt-4 bg-neutral-100;
-    }
+    } */
     a {
         @apply flex items-center gap-3 p-4;
     }
     a:hover {
-        @apply bg-neutral-200;
+        @apply bg-neon-light-lightest;
     }
 
-    nav.dark a:hover {
+    /* nav.dark a:hover {
         @apply bg-neutral-700;
-    }
+    } */
 </style>

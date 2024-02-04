@@ -28,9 +28,9 @@
         @apply flex-col;
     }
     a {
-        @apply flex justify-center items-center rounded;
+        @apply flex justify-center items-center rounded-full;
     }
     .text {
-        @apply block p-2;
+        @apply block py-2 px-3;
     }
 </style>

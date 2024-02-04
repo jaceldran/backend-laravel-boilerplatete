@@ -1,12 +1,10 @@
 <script>
-    // import { onMount } from "svelte";
     import PieChart from "@/components/Highcharts/PieChart.svelte";
     import Breadcrumb from "@/components/ui/Breadcrumb.svelte";
     import Navigation from "@/components/ui/Navigation.svelte";
-    // import Highcharts from "highcharts";
     import Main from "@/layouts/App.svelte";
-    // import Pagination from "@/components/Pagination.svelte";
-    // import { dateFormat, jsonRender, moneyFormat } from "@/utils.js";
+    import Icon from "@/components/ui/Icon.svelte";
+    import { faExpand } from "@fortawesome/free-solid-svg-icons";
 
     //export let sales;
     export let salesByProduct;
@@ -26,6 +24,7 @@
 
 <Main>
     <Breadcrumb {links} class="py-2">
+        <!-- <Icon icon={faExpand} /> -->
         <Navigation class="horizontal" {routes} />
     </Breadcrumb>
 

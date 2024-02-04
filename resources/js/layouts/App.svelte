@@ -10,23 +10,29 @@
 
     const user = $page.props.user;
     const mainNavigation = $page.props.mainNavigation;
-    const headerButtonApply =
-        "py-1 rounded-full bg-neutral-100 text-neutral-700 dark:bg-neutral-700 dark:text-neutral-300 w-12 inline-flex justify-center";
 </script>
 
 <div class="layout {$colorScheme}">
-    <header class="bg-white dark:bg-neutral-950">
-        <a use:inertia href="/" class="flex items-center justify-center ml-4">
-            <img src={Logo} alt="log" class="h-16" />
+    <header class="bg-white dark:bg-neon-dark-darker">
+        <a
+            use:inertia
+            href="/"
+            class="flex items-center justify-center px-6 py-2"
+        >
+            <img src={Logo} alt="log" class="h-12" />
         </a>
         <span class="flex items-center mr-4">
-            <Navigation class="mr-4" routes={mainNavigation} />
-            <DarkModeButton class={headerButtonApply} />
-            <UserButton class={headerButtonApply} {user} />
+            <Navigation
+                class="mr-4"
+                routes={mainNavigation}
+                linkActive="bg-neon-dark-medium text-neon-light-light"
+            />
+            <DarkModeButton />
+            <UserButton {user} />
         </span>
     </header>
 
-    <main class="container mx-auto {$$props.class}">
+    <main class="container mx-auto pb-8 {$$props.class}">
         <FlashMessage />
         <slot />
     </main>

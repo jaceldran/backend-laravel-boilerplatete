@@ -1,6 +1,6 @@
 <script>
     import Main from "@/layouts/App.svelte";
-    import Icon from "@/components/Icon.svelte";
+    import Icon from "@/components/ui/Icon.svelte";
     import { faEnvelope, faKey } from "@fortawesome/free-solid-svg-icons";
     import { router } from "@inertiajs/svelte";
 

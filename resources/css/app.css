@@ -1,3 +1,5 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@100;200;300;400;500;600;700;800&display=swap');
+
 @import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700;800;900&display=swap');
 
 @import url('https://fonts.googleapis.com/css2?family=Overpass:wght@100;200;300;400;500;600;700;800;900&display=swap');
@@ -9,6 +11,10 @@
 
 h1 {
     @apply mt-4 text-6xl font-extrabold tracking-tighter text-neutral-700;
+}
+
+.dark-neon {
+    @apply bg-[#262335];
 }
 
 /* @import './form.css'; */

@@ -29,6 +29,6 @@ class AuthController extends Controller
     {
         Auth::logout();
 
-        return redirect()->route('login')->with('success', 'Sesión finalizada ');
+        return redirect()->route('login'); //->with('success', 'Sesión finalizada ');
     }
 }
