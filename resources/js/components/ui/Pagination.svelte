@@ -33,8 +33,6 @@
     </section>
 </nav>
 
-<!-- <pre>{jsonRender(data)}</pre> -->
-
 <style>
     nav {
         @apply w-full flex justify-between items-center  px-2 font-medium;

@@ -3,32 +3,35 @@
     import { jsonRender } from "@/utils";
 </script>
 
-<Main class="h-screen flex flex-col items-center justify-center">
+<Main class="h-screen flex flex-col items-center justify-center gap-4">
     [HOME]
 
-    <section class="flex">
-        <div class="bg-neon-dark-lightest">bg-neon-dark-lightest</div>
-        <div class="bg-neon-dark-lighter">bg-neon-dark-lighter</div>
-        <div class="bg-neon-dark-light">bg-neon-dark-light</div>
-        <div class="bg-neon-dark-medium">bg-neon-dark-medium</div>
-        <div class="bg-neon-dark-dark">bg-neon-dark-dark</div>
-        <div class="bg-neon-dark-darker">bg-neon-dark-darker</div>
-        <div class="bg-neon-dark-darkest">bg-neon-dark-darkest</div>
+    <section class="flex dark">
+        <div class="bg-neon-400">bg-neon-400</div>
+        <div class="bg-neon-500">bg-neon-500</div>
+        <div class="bg-neon-600">bg-neon-600</div>
+        <div class="bg-neon-700">bg-neon-700</div>
+        <div class="bg-neon-800">bg-neon-800</div>
+        <div class="bg-neon-900">bg-neon-900</div>
+        <div class="bg-neon-950">bg-neon-950</div>
     </section>
 
-    <section class="flex">
-        <div class="bg-neon-light-lightest">bg-neon-light-lightest</div>
-        <div class="bg-neon-light-lighter">bg-neon-light-lighter</div>
-        <div class="bg-neon-light-light">bg-neon-light-light</div>
-        <div class="bg-neon-light-medium">bg-neon-light-medium</div>
-        <div class="bg-neon-light-dark">bg-neon-light-dark</div>
-        <div class="bg-neon-light-darker">bg-neon-light-darker</div>
-        <div class="bg-neon-light-darkest">bg-neon-light-darkest</div>
+    <section class="flex light">
+        <div class="bg-neon-50">bg-neon-50</div>
+        <div class="bg-neon-100">bg-neon-100</div>
+        <div class="bg-neon-150">bg-neon-150</div>
+        <div class="bg-neon-200">bg-neon-200</div>
+        <div class="bg-neon-250">bg-neon-250</div>
+        <div class="bg-neon-300">bg-neon-300</div>
+        <div class="bg-neon-350">bg-neon-350</div>
     </section>
 </Main>
 
 <style>
     div {
-        @apply p-8 text-white h-full;
+        @apply w-48 p-8 border border-white;
+    }
+    section.dark {
+        @apply text-white;
     }
 </style>

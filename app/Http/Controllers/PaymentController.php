@@ -14,20 +14,15 @@ class PaymentController extends Controller
         $payments = Payment::query()
             ->orderBy('created_at', 'desc');
 
-        $query = request('q', null);
-
-        if ($query) {
-            $words = explode(' ', request('q'));
-            $where = [];
-            $columns = ['reference', 'source_type', 'source_name', 'source_id', 'amount', 'data'];
-            foreach ($words as $word) {
-                $likeWord = [];
-                foreach ($columns as $column) {
-                    $likeWord[] = "$column like '%$word%'";
-                }
-                $where[] = "(" . implode(' or ', $likeWord) . ")";
-            }
-            $payments->whereRaw(implode(' and ', $where));
+        if ($query = request('q', null)) {
+            $payments->searchInColumns($query, [
+                'reference',
+                'source_type',
+                'source_name',
+                'source_id',
+                'amount',
+                'data'
+            ]);
         }
 
         $data = [

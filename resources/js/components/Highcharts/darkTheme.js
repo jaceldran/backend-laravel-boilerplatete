@@ -7,7 +7,8 @@ export default {
         enabled: false,
     },
     chart: {
-        backgroundColor: tailwind.neutral[800],
+        // backgroundColor: tailwind.neutral[800],
+        backgroundColor: tailwind.transparent,
     },
     title: {
         style: {

@@ -4,6 +4,11 @@
 
     export let icon;
     export let size;
+    export let color;
+    export let hover;
+
+    color = color || "text-neutral-400 ";
+    hover = hover || "hover:text-neutral-500 dark:hover:text-neon-light-dark";
 
     // Configurar FontAwesome
     config.autoReplaceSvg = "nest";
@@ -15,7 +20,7 @@
     dom.watch();
 </script>
 
-<Fa {icon} {size} class={$$props.class} />
+<Fa {icon} {size} class="{color} {hover} {$$props.class}" />
 
 <style>
     .fa-spin {

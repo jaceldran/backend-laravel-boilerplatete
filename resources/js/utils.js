@@ -5,6 +5,7 @@ import _moneyFormat from "@/utils/_moneyFormat.js"
 import _numberFormat from "@/utils/_numberFormat.js"
 import _monthName from "@/utils/_monthName.js"
 import _buildChartSerie from "@/utils/_buildChartSerie.js"
+import _isDate from "@/utils/_isDate.js"
 
 export const amountType = _amountType;
 export const dateFormat = _dateFormat;
@@ -13,3 +14,4 @@ export const moneyFormat = _moneyFormat;
 export const numberFormat = _numberFormat;
 export const monthName = _monthName;
 export const buildChartSerie = _buildChartSerie;
+export const isDate = _isDate;

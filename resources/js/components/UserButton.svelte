@@ -30,9 +30,13 @@
             {#if $colorScheme === "dark"}
                 <IconBadge icon={faUserNinja} class="dark:bg-transparent" />
             {:else}
-                <IconBadge icon={faUserAstronaut} class="bg-transparent" />
+                <IconBadge
+                    icon={faUserAstronaut}
+                    class="bg-transparent {$$props.class}"
+                />
             {/if}
         </button>
+
         <div class=" {showOptions ? 'block' : 'hidden'}">
             <menu class="menu {menuApply}">
                 <span

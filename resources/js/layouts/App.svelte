@@ -25,10 +25,11 @@
             <Navigation
                 class="mr-4"
                 routes={mainNavigation}
-                linkActive="bg-neon-dark-medium text-neon-light-light"
+                linkDefault="text-neon-dark-lightest font-medium dark:text-neon-light-medium"
+                linkActive="bg-neon-light-lightest dark:bg-neon-dark-medium"
             />
-            <DarkModeButton />
-            <UserButton {user} />
+            <DarkModeButton class="" />
+            <UserButton class="" {user} />
         </span>
     </header>
 

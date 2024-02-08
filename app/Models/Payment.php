@@ -2,13 +2,10 @@
 
 namespace App\Models;
 
-use App\Traits\GenerateUuid;
-use Illuminate\Database\Eloquent\Model;
-use Illuminate\Database\Eloquent\Factories\HasFactory;
-
-class Payment extends Model
+class Payment extends AppModel
 {
-    use HasFactory, GenerateUuid;
+    protected $connection = 'service';
+    protected $table = 'payment';
 
     protected $casts = [
         'data' => 'json',

@@ -15,14 +15,8 @@ class EnrolmentController extends Controller
         $enrolments = Enrolment::query()
             ->orderBy('created_at', 'desc');
 
-        $query = request('q', null);
-
-        if ($query) {
-            $words = explode(' ', request('q'));
-
-            foreach ($words as $word) {
-                $enrolments->orWhere('data', 'like', "%{$word}%");
-            }
+        if ($query = request('q', null)) {
+            $enrolments->searchInColumns($query, ['contact_email', 'product_id', 'data']);
         }
 
         $data = [

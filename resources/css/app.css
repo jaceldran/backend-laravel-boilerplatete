@@ -9,13 +9,15 @@
 @tailwind utilities;
 
 
-h1 {
-    @apply mt-4 text-6xl font-extrabold tracking-tighter text-neutral-700;
+h1.text-hero {
+    @apply my-4 text-6xl font-extrabold tracking-[-4px] border-b-4 dark:text-neon-light-medium dark:border-neon-light-medium;
 }
 
-.dark-neon {
-    @apply bg-[#262335];
+/* fakes */
+button.action {
+    @apply h-8 px-2 bg-neutral-700 hover:bg-neutral-600 text-white rounded text-sm;
 }
+
 
 /* @import './form.css'; */
 /* @import './table.css'; */

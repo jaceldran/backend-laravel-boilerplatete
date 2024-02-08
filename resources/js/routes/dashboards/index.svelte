@@ -1,54 +1,59 @@
 <script>
-    import Main from "@/layouts/App.svelte";
-    import { inertia, page } from "@inertiajs/svelte";
-    import { colorScheme } from "@/stores/colorScheme.js";
-    import Breadcrumb from "@/components/ui/Breadcrumb.svelte";
-    import Navigation from "@/components/ui/Navigation.svelte";
-    import Icon from "@/components/ui/Icon.svelte";
-    import { faArrowRight } from "@fortawesome/free-solid-svg-icons";
+    import MainContent from "@/layouts/App.svelte";
+    import { inertia } from "@inertiajs/svelte";
 
-    const links = [{ text: "Dashboards", href: "/dashboards" }];
-
-    const routes = [
-        { text: "Marketing", href: "/dashboards/marketing", active: false },
-        { text: "Académico", href: "/dashboards/marketing", active: false },
-        { text: "Financiero", href: "/dashboards/marketing", active: false },
+    const logLinks = [
+        {
+            href: "/dashboards/marketing",
+            text: "Marketing",
+            description:
+                "Estado de objetivos de captación de leads, contacts, efectividad de estrategias, tasas de conversión, etc.",
+        },
+        {
+            href: "/dashboards/marketing",
+            text: "Financiero",
+            description:
+                "Estado de objetivos de ingresos y ventas, indicadores de rentabilidad, de productividad, costes por estudiante/programa, etc.",
+        },
+        {
+            href: "/dashboards/marketing",
+            text: "Académico",
+            description:
+                "Tiempo promedio para completar máster o curso, coste por estudiante/programa, distribución por tipo de asistencia presencial, online, blended, etc.",
+        },
     ];
 </script>
 
-<Main>
-    <Breadcrumb {links} class="py-2">
-        <Navigation class="horizontal" {routes} />
-    </Breadcrumb>
+<MainContent class="flex flex-col ">
+    <h1 class="text-hero">Dashboards</h1>
 
-    <nav class={$colorScheme}>
-        <a use:inertia href="/dashboards/marketing">
-            <Icon class="-mt-1" icon={faArrowRight} />
-            <span class=" font-semibold"> Marketing</span>
-        </a>
-        <a use:inertia href="/dashboards/marketing">
-            <Icon class="-mt-1" icon={faArrowRight} />
-            <span class=" font-semibold">Académico</span>
-        </a>
-        <a use:inertia href="/dashboards/marketing">
-            <Icon class="-mt-1" icon={faArrowRight} />
-            <span class=" font-semibold">Financiero</span>
-        </a>
+    <p class="my-4 text-lg">Visualizaciones varias según datos disponibles.</p>
+    <nav
+        class="flex flex-col rounded bg-neon-light-lightest dark:bg-neon-dark-medium"
+    >
+        <dl>
+            {#each logLinks as { text, href, description }}
+                <a
+                    use:inertia
+                    {href}
+                    class="hover:bg-neon-light-lighter dark:hover:bg-neon-dark-dark dark:text-white"
+                >
+                    <dt>{text}</dt>
+                    <dd>{@html description}</dd>
+                </a>
+            {/each}
+        </dl>
     </nav>
-</Main>
+</MainContent>
 
 <style>
-    /* nav {
-        @apply rounded shadow-sm mt-4 bg-neutral-100;
-    } */
     a {
-        @apply flex items-center gap-3 p-4;
+        @apply block p-4;
     }
-    a:hover {
-        @apply bg-neon-light-lightest;
+    dt {
+        @apply text-lg font-medium;
     }
-
-    /* nav.dark a:hover {
-        @apply bg-neutral-700;
-    } */
+    dd {
+        @apply px-4;
+    }
 </style>

@@ -13,9 +13,9 @@
 
 <body
     class="antialiased
-    dark:text-neutral-400
+    dark:text-neon-light-lighter
     bg-neutral-50 text-neutral-600 text-normal
-    dark:bg-gradient-to-bl  dark:from-neon-dark-darkest dark:to-neon-dark-darker">
+    dark:bg-gradient-to-bl  dark:from-neon-dark-dark dark:to-neon-dark-darkest">
     @inertia
 </body>
 

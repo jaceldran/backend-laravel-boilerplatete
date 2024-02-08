@@ -10,7 +10,7 @@
 
 <button class={$$props.class} on:click={toggle}>
     {#if $colorScheme === "light"}
-        <IconBadge icon={faMoon} class="bg-transparent" />
+        <IconBadge icon={faMoon} class="bg-transparent {$$props.class}" />
     {/if}
 
     {#if $colorScheme === "dark"}

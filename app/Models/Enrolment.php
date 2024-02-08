@@ -2,13 +2,10 @@
 
 namespace App\Models;
 
-use App\Traits\GenerateUuid;
-use Illuminate\Database\Eloquent\Model;
-use Illuminate\Database\Eloquent\Factories\HasFactory;
-
-class Enrolment extends Model
+class Enrolment extends AppModel
 {
-    use HasFactory, GenerateUuid;
+    protected $connection = 'service';
+    protected $table = 'enrolment_form';
 
     protected $casts = [
         'data' => 'json',
