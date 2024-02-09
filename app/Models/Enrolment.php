@@ -2,7 +2,7 @@
 
 namespace App\Models;
 
-class Enrolment extends AppModel
+class Enrolment extends AppEloquentModel
 {
     protected $connection = 'service';
     protected $table = 'enrolment_form';

@@ -2,7 +2,7 @@
 
 namespace App\Models;
 
-class Payment extends AppModel
+class Payment extends AppEloquentModel
 {
     protected $connection = 'service';
     protected $table = 'payment';

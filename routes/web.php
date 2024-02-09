@@ -24,9 +24,7 @@ Route::get('/', function () {
 Route::middleware('auth:sanctum')->group(function () {
     Route::resource('/enrolments', EnrolmentController::class);
     Route::resource('/payments', PaymentController::class);
-
     Route::get('/diplomas', DiplomaController::class);
-
     Route::get('/logs', LogController::class);
 
     Route::prefix('/dashboards')->group(function () {

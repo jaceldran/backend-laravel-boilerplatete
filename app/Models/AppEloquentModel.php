@@ -2,17 +2,17 @@
 
 namespace App\Models;
 
-use App\Builders\AppBuilder;
+use App\Models\AppEloquentBuilder;
 use App\Traits\GenerateUuid;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 
-class AppModel extends Model
+class AppEloquentModel extends Model
 {
     use HasFactory, GenerateUuid;
 
-    public function newEloquentBuilder($query): AppBuilder
+    public function newEloquentBuilder($query): AppEloquentBuilder
     {
-        return new AppBuilder($query);
+        return new AppEloquentBuilder($query);
     }
 }
