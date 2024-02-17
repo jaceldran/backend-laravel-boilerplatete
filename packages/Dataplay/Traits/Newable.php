@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Traits;
+namespace Packages\Dataplay\Traits;
 
 use ReflectionClass;
 

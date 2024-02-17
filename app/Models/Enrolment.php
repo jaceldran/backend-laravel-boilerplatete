@@ -2,6 +2,8 @@
 
 namespace App\Models;
 
+use Packages\Dataplay\Models\AppEloquentModel;
+
 class Enrolment extends AppEloquentModel
 {
     protected $connection = 'service';

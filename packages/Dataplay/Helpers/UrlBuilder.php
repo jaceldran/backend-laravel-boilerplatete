@@ -1,8 +1,8 @@
 <?php
 
-namespace App\Helpers;
+namespace Packages\Dataplay\Helpers;
 
-use App\Traits\Newable;
+use Packages\Dataplay\Traits\Newable;
 
 class UrlBuilder
 {

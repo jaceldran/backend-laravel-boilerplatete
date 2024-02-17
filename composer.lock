@@ -4,8 +4,98 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "7bb3ded53626901c5b88ac4c7d2ecbc0",
+    "content-hash": "32248ddf4f677ef3d0174cc934317bb0",
     "packages": [
+        {
+            "name": "alexacrm/dynamics-webapi-toolkit",
+            "version": "dev-master",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/AlexaCRM/dynamics-webapi-toolkit.git",
+                "reference": "b102b1fb3f750db32614179ffdb579f5b10661a6"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/AlexaCRM/dynamics-webapi-toolkit/zipball/b102b1fb3f750db32614179ffdb579f5b10661a6",
+                "reference": "b102b1fb3f750db32614179ffdb579f5b10661a6",
+                "shasum": ""
+            },
+            "require": {
+                "alexacrm/strong-serializer": "^2.0",
+                "elao/enum": "^1.6",
+                "guzzlehttp/guzzle": "^6.5 || ^7.0",
+                "php": "^7.4 || ^8.0",
+                "psr/cache": "^1.0 || ^2.0 || ^3.0",
+                "psr/log": "^1.0 || ^2.0 || ^3.0"
+            },
+            "require-dev": {
+                "phpunit/phpunit": "^8.5.30 || ^9.5"
+            },
+            "default-branch": true,
+            "type": "library",
+            "autoload": {
+                "psr-4": {
+                    "AlexaCRM\\": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "AlexaCRM",
+                    "email": "info@alexacrm.com"
+                }
+            ],
+            "description": "Web API toolkit for Microsoft Dynamics 365 and Dynamics CRM",
+            "support": {
+                "issues": "https://github.com/AlexaCRM/dynamics-webapi-toolkit/issues",
+                "source": "https://github.com/AlexaCRM/dynamics-webapi-toolkit/tree/master"
+            },
+            "time": "2023-12-14T04:31:22+00:00"
+        },
+        {
+            "name": "alexacrm/strong-serializer",
+            "version": "2.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/AlexaCRM/strong-serializer.git",
+                "reference": "afff8a2b718e4882c11d62456bf44d03fedbac90"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/AlexaCRM/strong-serializer/zipball/afff8a2b718e4882c11d62456bf44d03fedbac90",
+                "reference": "afff8a2b718e4882c11d62456bf44d03fedbac90",
+                "shasum": ""
+            },
+            "require-dev": {
+                "php": "^7.4",
+                "phpunit/phpunit": "^8.4"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-4": {
+                    "AlexaCRM\\StrongSerializer\\": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Pavel Selitskas",
+                    "email": "p.selitskas@gmail.com"
+                }
+            ],
+            "description": "Converts generic objects to strongly-typed objects and vice-versa.",
+            "support": {
+                "issues": "https://github.com/AlexaCRM/strong-serializer/issues",
+                "source": "https://github.com/AlexaCRM/strong-serializer/tree/2.0"
+            },
+            "time": "2020-09-18T11:46:28+00:00"
+        },
         {
             "name": "brick/math",
             "version": "0.11.0",
@@ -500,6 +590,99 @@
                 }
             ],
             "time": "2023-10-06T06:47:41+00:00"
+        },
+        {
+            "name": "elao/enum",
+            "version": "v1.17.3",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/Elao/PhpEnums.git",
+                "reference": "400030fc98d4211ba9b42ebd76b0114cf27fe704"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/Elao/PhpEnums/zipball/400030fc98d4211ba9b42ebd76b0114cf27fe704",
+                "reference": "400030fc98d4211ba9b42ebd76b0114cf27fe704",
+                "shasum": ""
+            },
+            "require": {
+                "ext-json": "*",
+                "php": ">=7.3",
+                "symfony/polyfill-php80": "^1.15"
+            },
+            "require-dev": {
+                "api-platform/core": "^2.5.1",
+                "doctrine/annotations": "^1.9",
+                "doctrine/data-fixtures": "^1.2",
+                "doctrine/doctrine-bundle": "^1.12|^2.0",
+                "doctrine/orm": "^2.4",
+                "ext-pdo_sqlite": "*",
+                "nelmio/alice": "^3.0",
+                "symfony/browser-kit": "^4.4|^5.1|^6.0",
+                "symfony/console": "^4.4|^5.1|^6.0",
+                "symfony/css-selector": "^4.4|^5.1|^6.0",
+                "symfony/finder": "^4.4|^5.1|^6.0",
+                "symfony/form": "^4.4|^5.1|^6.0",
+                "symfony/framework-bundle": "^4.4|^5.1|^6.0",
+                "symfony/phpunit-bridge": "^5.3|^6.0",
+                "symfony/serializer": "^4.4|^5.1|^6.0",
+                "symfony/translation": "^4.4|^5.1|^6.0",
+                "symfony/twig-bundle": "^4.4|^5.1|^6.0",
+                "symfony/validator": "^4.4|^5.1|^6.0",
+                "symfony/yaml": "^4.4|^5.1|^6.0",
+                "twig/twig": "^2.12|^3.0"
+            },
+            "bin": [
+                "bin/elao-enum-dump-js"
+            ],
+            "type": "library",
+            "extra": {
+                "branch-alias": {
+                    "dev-master": "1.x-dev",
+                    "dev-1.x": "1.x-dev"
+                }
+            },
+            "autoload": {
+                "files": [
+                    "src/Bridge/Symfony/VarDumper/Resources/register_caster.php"
+                ],
+                "psr-4": {
+                    "Elao\\Enum\\": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Elao",
+                    "homepage": "https://www.elao.com"
+                },
+                {
+                    "name": "Maxime Steinhausser",
+                    "email": "maxime.steinhausser@gmail.com",
+                    "homepage": "https://github.com/ogizanagi"
+                }
+            ],
+            "description": "Enumerations for PHP and frameworks integrations",
+            "homepage": "https://github.com/Elao/PhpEnums",
+            "keywords": [
+                "doctrine",
+                "enum",
+                "symfony"
+            ],
+            "support": {
+                "issues": "https://github.com/Elao/PhpEnums/issues",
+                "source": "https://github.com/Elao/PhpEnums/tree/v1.17.3"
+            },
+            "funding": [
+                {
+                    "url": "https://github.com/ogizanagi",
+                    "type": "github"
+                }
+            ],
+            "time": "2023-03-13T12:41:41+00:00"
         },
         {
             "name": "fruitcake/php-cors",
@@ -2609,6 +2792,55 @@
                 }
             ],
             "time": "2023-11-12T21:59:55+00:00"
+        },
+        {
+            "name": "psr/cache",
+            "version": "3.0.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/php-fig/cache.git",
+                "reference": "aa5030cfa5405eccfdcb1083ce040c2cb8d253bf"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/php-fig/cache/zipball/aa5030cfa5405eccfdcb1083ce040c2cb8d253bf",
+                "reference": "aa5030cfa5405eccfdcb1083ce040c2cb8d253bf",
+                "shasum": ""
+            },
+            "require": {
+                "php": ">=8.0.0"
+            },
+            "type": "library",
+            "extra": {
+                "branch-alias": {
+                    "dev-master": "1.0.x-dev"
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "Psr\\Cache\\": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "PHP-FIG",
+                    "homepage": "https://www.php-fig.org/"
+                }
+            ],
+            "description": "Common interface for caching libraries",
+            "keywords": [
+                "cache",
+                "psr",
+                "psr-6"
+            ],
+            "support": {
+                "source": "https://github.com/php-fig/cache/tree/3.0.0"
+            },
+            "time": "2021-02-03T23:26:27+00:00"
         },
         {
             "name": "psr/clock",
@@ -8486,7 +8718,9 @@
     ],
     "aliases": [],
     "minimum-stability": "stable",
-    "stability-flags": [],
+    "stability-flags": {
+        "alexacrm/dynamics-webapi-toolkit": 20
+    },
     "prefer-stable": true,
     "prefer-lowest": false,
     "platform": {

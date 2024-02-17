@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Helpers;
+namespace Packages\Dataplay\Helpers;
 
 final class Metrics
 {
