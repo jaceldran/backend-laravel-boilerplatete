@@ -39,24 +39,24 @@
 <div class="grid grid-cols-4 w-full">
     {#each Object.entries(data) as [key, value]}
         <div
-            class="truncate p-2 border-b border-neon-light-lighter bg-neon-light-lightest dark:border-neon-light-darkest col-span-1 dark:bg-neon-dark-dark"
+            class="truncate p-2 border-b border-neon-100 bg-neon-50 dark:border-neon-500 col-span-1 dark:bg-neon-900"
         >
             {key}
         </div>
         <div
-            class="truncate p-2 border-b border-neon-light-lighter dark:border-neon-light-darkest col-span-3"
+            class="whitespace-break-spaces p-2 border-b border-neon-100 dark:border-neon-500 col-span-3"
         >
             {#if value && typeof value === "object"}
                 <div class="grid grid-cols-4">
                     {#each Object.entries(value) as [k, v]}
                         <div
-                            class="truncate p-2 border-b border-neon-light-lighter bg-neon-light-lightest dark:border-neon-light-darker col-span-1 dark:bg-neon-dark-dark"
+                            class="truncate p-2 border-b border-neon-100 bg-neon-50 dark:border-500 col-span-1 dark:bg-neon-900"
                         >
                             {k}
                         </div>
 
                         <div
-                            class="truncate p-2 border-b border-neon-light-lighter dark:border-neon-ligstt-darker col-span-3"
+                            class="whitespace-break-spaces p-2 border-b col-span-3"
                         >
                             {renderValue(v)}
                         </div>

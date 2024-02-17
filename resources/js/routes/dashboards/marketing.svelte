@@ -30,18 +30,36 @@
         </button>
     </ToolBar>
 
-    <div id="dashboard" class="flex-1 outline bg-green-100 flex">
-        <div class="bg-red-100 text-red-900 w-1/4 flex flex-col">
-            <div class="widget bg-red-200">
-                <b>column 1 - widget 1</b>
-                <p>La altura de este se adapta al contenido</p>
+    <div id="dashboard" class="flex-1 outline bg-green-100 flex max-h-full">
+        <div class="panel bg-red-100 text-red-900 w-1/4 flex flex-col">
+            <div class=" widget bg-neon-50">
+                <Pie data={salesByCategory} />
             </div>
-            <div class="widget gb-red-300 flex-1">
-                <b>column 1 - widget 2</b>
-                <p>la altura de este ocupa el resto disponible</p>
+            <div class=" widget bg-neon-50">
+                <Pie data={salesByCategory} />
             </div>
         </div>
-        <div class="bg-blue-100 w-2/4">column 2</div>
-        <div class="bg-fuchsia-100 w-1/4">column 3</div>
+
+        <div class="panel bg-blue-100 flex-1">
+            <Funnel />
+        </div>
+
+        <div class="panel bg-fuchsia-100 flex-col w-1/4">
+            <div class="widget bg-neon-100">
+                <Pie data={salesByProduct} />
+            </div>
+            <div class="widget bg-neon-100">
+                <Pie data={salesByProduct} />
+            </div>
+        </div>
     </div>
 </Main>
+
+<style>
+    .panel {
+        @apply flex justify-center;
+    }
+    .widget {
+        @apply flex-1 border border-dotted border-red-600;
+    }
+</style>

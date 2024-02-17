@@ -8,7 +8,7 @@
     export let hover;
 
     color = color || "text-neutral-400 ";
-    hover = hover || "hover:text-neutral-500 dark:hover:text-neon-light-dark";
+    hover = hover || "hover:text-neutral-500 dark:hover:text-neon-700";
 
     // Configurar FontAwesome
     config.autoReplaceSvg = "nest";

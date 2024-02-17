@@ -1,5 +1,3 @@
-<table
-    class="border-neon-light-light dark:border-neon-dark-medium w-full {$$props.class}"
->
+<table class="border-neon-100 dark:border-neon-700 w-full {$$props.class}">
     <slot />
 </table>

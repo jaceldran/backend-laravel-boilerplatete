@@ -10,10 +10,11 @@
 
     export let title;
 
+    const id = `id_${Math.random().toString(36).substring(2)}`;
+
     Funnel(Highcharts);
 
     let chart;
-    let id = "funnel-container";
 
     const options = {
         chart: {
@@ -158,5 +159,5 @@
 </script>
 
 <div class={$$props.class}>
-    <div id="funnel-container" class="w-full h-full"></div>
+    <div {id} class="w-full h-full"></div>
 </div>

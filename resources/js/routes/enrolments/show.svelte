@@ -2,6 +2,7 @@
     import Main from "@/layouts/App.svelte";
     import Breadcrumb from "@/components/ui/Breadcrumb.svelte";
     import ObjectRender from "@/components/ui/ObjectRender.svelte";
+    import { jsonRender } from "@/utils";
 
     export let enrolment;
 
@@ -40,10 +41,12 @@
 <Main>
     <Breadcrumb {links} />
 
-    <div class="py-4 text-xl font-medium">
-        <div>name: {contactName()}</div>
-        <div>email: {data.contact_email}</div>
-        <div class="capitalize">product: {productName().toLowerCase()}</div>
+    <div class="text-lg bg-neon-50 rounded my-4 p-2">
+        <div>{contactName()}</div>
+        <div>{data.contact_email}</div>
+        <div class="capitalize">
+            {productName().toLowerCase()}
+        </div>
     </div>
 
     <ObjectRender {data} />

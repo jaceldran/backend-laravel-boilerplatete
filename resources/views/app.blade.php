@@ -9,13 +9,10 @@
     @inertiaHead
 </head>
 
-{{-- dark:bg-[#241b2f] --}}
-
-<body
-    class="antialiased
-    dark:text-neon-light-lighter
+<body class="antialiased
+    dark:bg-neon-950 dark:text-neon-150
     bg-neutral-50 text-neutral-600 text-normal
-    dark:bg-gradient-to-bl  dark:from-neon-dark-dark dark:to-neon-dark-darkest">
+    ">
     @inertia
 </body>
 

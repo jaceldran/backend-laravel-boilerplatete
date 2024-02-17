@@ -46,15 +46,13 @@
         años académicos, programas, ediciones, matrículas y estudiantes.
     </p>
 
-    <nav
-        class="flex flex-col rounded bg-neon-light-lightest dark:bg-neon-dark-medium"
-    >
+    <nav class="flex flex-col rounded bg-neon-50 dark:bg-neon-800">
         <dl>
             {#each logLinks as { text, href, description }}
                 <a
                     use:inertia
                     {href}
-                    class="hover:bg-neon-light-lighter dark:hover:bg-neon-dark-dark dark:text-white"
+                    class="hover:bg-neon-100 dark:hover:bg-neon-700 dark:text-white"
                 >
                     <dt>{text}</dt>
                     <dd>{@html description}</dd>

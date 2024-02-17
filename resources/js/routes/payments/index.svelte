@@ -98,11 +98,13 @@
                     </TableTd>
                     <TableTd>{source_type}</TableTd>
                     <TableTd>
-                        <a
-                            class="inline-block max-w-30"
-                            use:inertia
-                            href="/payments/{id}">{reference}</a
-                        >
+                        {reference}
+                        <div class="text-sm">
+                            {data.charge_preinscripcion_numero || ""}
+                            {data.charge_preinscripcion_nombre || ""}
+                            {data.charge_preinscripcion_apellidos || ""}
+                            {data.charge_preinscripcion_edicion_id || ""}
+                        </div>
                     </TableTd>
                     <TableTd class="method">{method}</TableTd>
                     <TableTd class="attempts">{attempts}</TableTd>
@@ -121,4 +123,6 @@
     </TableContent>
 
     <Pagination data={payments} />
+
+    <!-- <pre>{jsonRender(payments)}</pre> -->
 </MainContent>

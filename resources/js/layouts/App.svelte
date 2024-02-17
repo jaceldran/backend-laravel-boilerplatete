@@ -13,7 +13,7 @@
 </script>
 
 <div class="layout {$colorScheme}">
-    <header class="bg-white dark:bg-neon-dark-darker">
+    <header class="bg-white dark:bg-neon-900">
         <a
             use:inertia
             href="/"
@@ -25,8 +25,8 @@
             <Navigation
                 class="mr-4"
                 routes={mainNavigation}
-                linkDefault="text-neon-dark-lightest font-medium dark:text-neon-light-medium"
-                linkActive="bg-neon-light-lightest dark:bg-neon-dark-medium"
+                linkDefault="text-neon-500 font-medium dark:text-neon-200"
+                linkActive="bg-neon-50 dark:bg-neon-600"
             />
             <DarkModeButton class="" />
             <UserButton class="" {user} />

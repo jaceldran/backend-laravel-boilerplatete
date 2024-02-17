@@ -1,7 +1,7 @@
 <tr
     class="border-inherit border-b
-    hover:bg-neon-light-lightest
-    dark:hover:bg-neon-dark-darker {$$props.class || ''}"
+    hover:bg-neon-50
+    dark:hover:bg-neon-900 {$$props.class || ''}"
 >
     <slot />
 </tr>

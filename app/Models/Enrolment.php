@@ -9,5 +9,6 @@ class Enrolment extends AppEloquentModel
 
     protected $casts = [
         'data' => 'json',
+        'sync_log' => 'json',
     ];
 }

@@ -10,7 +10,7 @@
 
 
 h1.text-hero {
-    @apply my-4 text-6xl font-extrabold tracking-[-4px] border-b-4 dark:text-neon-light-medium dark:border-neon-light-medium;
+    @apply my-4 text-6xl font-extrabold tracking-[-4px] border-b-4;
 }
 
 /* fakes */

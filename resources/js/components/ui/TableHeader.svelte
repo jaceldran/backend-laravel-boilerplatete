@@ -1,5 +1,5 @@
 <thead
-    class="border-inherit dark:bg-neon-dark-darker bg-neon-light-lightest {$$props.class}
+    class="border-inherit dark:bg-neon-900 bg-neon-50 {$$props.class}
 "
 >
     <slot />
