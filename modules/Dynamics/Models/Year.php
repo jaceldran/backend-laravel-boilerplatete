@@ -1,10 +1,10 @@
 <?php
 
-namespace Modules\DynamicsModels;
+namespace Modules\Dynamics\Models;
 
 use Packages\Dynamics\DynamicsModel;
 
-class DynamicsYear extends DynamicsModel
+class Year extends DynamicsModel
 {
     protected string $entityName = 'bit_cursoacademico';
 

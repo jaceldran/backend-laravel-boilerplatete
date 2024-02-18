@@ -12,7 +12,6 @@ namespace Packages\Dynamics;
  * @see https://github.com/AlexaCRM/dynamics-webapi-toolkit/wiki/Tutorial
  */
 
-use Packages\Dataplay\Helpers\Render;
 use Packages\Dynamics\FetchXml\Filter;
 use Packages\Dynamics\FetchXml\OrderBy;
 use Packages\Dynamics\FetchXml\Attribute;
@@ -24,12 +23,12 @@ class DynamicsQuery
     private array $filters = [];
     private array $linkFilters = [];
     private array $attributes = [];
-    private string $pagingCookie = '';
     private string $orderByAttribute = '';
     private string $orderByDirection = '';
     private int $page = 0;
     private int $count = 0;
-    private bool $enableOutput = false;
+    private bool $debug = false;
+    private bool $debugAndStop = false;
 
     public function __construct(string $entity)
     {
@@ -43,9 +42,15 @@ class DynamicsQuery
         return $this;
     }
 
-    public function page(int $page, int $count): static
+    public function page(int $page): static
     {
         $this->page = $page;
+
+        return $this;
+    }
+
+    public function count(int $count): static
+    {
         $this->count = $count;
 
         return $this;
@@ -106,63 +111,59 @@ class DynamicsQuery
         return $this;
     }
 
-    public function output(bool $enable = true): static
+    public function debug(bool $debugAndStop = false): static
     {
-        $this->enableOutput = $enable;
+        $this->debug = true;
+        $this->debugAndStop = $debugAndStop;
 
         return $this;
     }
 
     public function build(): string
     {
-        $pagination = $this->page > 0 && $this->count > 0;
+        $lines = [];
 
-        $values = [
-            'entity' => $this->entity,
-            'attributes' => Attribute::render($this->attributes),
-            'filters' => Filter::render($this->filters),
-            'linkfilters' => LinkFilter::render($this->linkFilters),
-            'orderby' => OrderBy::render($this->orderByAttribute, $this->orderByDirection),
-            'paging-cookie' => $this->pagingCookie = '',
-            'page' => $this->page,
-            'count' => $this->count,
-        ];
+        if ($this->page > 0 && $this->count > 0) {
+            $lines[] = sprintf('<fetch mapping="logical" page="%d" count="%d">', $this->page, $this->count);
+        } elseif ($this->count > 0) {
+            $lines[] = sprintf('<fetch mapping="logical" count="%d">', $this->count);
+        } else {
+            $lines[] = '<fetch mapping="logical">';
+        }
 
-        $lines = array_filter(
-            explode(PHP_EOL, Render::element($values, self::template($pagination))),
-            fn($line) => !empty(trim($line))
-        );
+        $lines[] = sprintf('<entity name="%s">', $this->entity);
+
+        if (!empty($this->attributes)) {
+            $lines[] = Attribute::render($this->attributes);
+        }
+
+        if (!empty($this->filters)) {
+            $lines[] = Filter::render($this->filters);
+        }
+
+        if (!empty($this->linkFilters)) {
+            $lines[] = LinkFilter::render($this->linkFilters);
+        }
+
+        if (!empty($this->orderByAttribute)) {
+            $lines[] = OrderBy::render($this->orderByAttribute, $this->orderByDirection);
+        }
+
+        $lines[] = "</entity>";
+
+        $lines[] = "</fetch>";
 
         $fetchExpression = implode(PHP_EOL, $lines);
 
-        if ($this->enableOutput) {
+        if ($this->debug) {
             echo PHP_EOL . str_repeat('*', 80);
             echo PHP_EOL . $fetchExpression . PHP_EOL;
             echo str_repeat('*', 80) . PHP_EOL;
+            if ($this->debugAndStop) {
+                dd(__METHOD__);
+            }
         }
 
         return $fetchExpression;
-    }
-
-
-    public static function template(bool $pagination = false): string
-    {
-        $lines = [];
-        if ($pagination) {
-            $lines[] = "<fetch mapping=\"logical\" "
-                . "paging-cookie=\"{paging-cookie}\" "
-                . "page=\"{page}\" count=\"{count}\">";
-        } else {
-            $lines[] = "<fetch mapping=\"logical\">";
-        }
-        $lines[] = "<entity name=\"{entity}\">";
-        $lines[] = "{attributes}";
-        $lines[] = "{filters}";
-        $lines[] = "{linkfilters}";
-        $lines[] = "{orderby}";
-        $lines[] = "</entity>";
-        $lines[] = "</fetch>";
-
-        return implode(PHP_EOL, $lines);
     }
 }

@@ -5,23 +5,44 @@ namespace App\Console\Commands;
 use Exception;
 use App\Models\Enrolment;
 use Illuminate\Console\Command;
+use Modules\Dynamics\Models\Lead;
+use Modules\Dynamics\Models\Program;
+use Modules\Dynamics\Models\TrainingArea;
+use Modules\Dynamics\Models\User;
+use Modules\Dynamics\Models\Year;
 use Illuminate\Support\Facades\Log;
-use Packages\Dynamics\DynamicsModel;
+use Modules\Dynamics\Models\Account;
+use Modules\Dynamics\Models\Contact;
+use Modules\Dynamics\Models\Country;
+use Modules\Dynamics\Models\Product;
+use Modules\Dynamics\Models\Business;
+use Modules\Dynamics\Models\Province;
 use Packages\Dataplay\Helpers\Render;
 use Illuminate\Support\Facades\Storage;
-use Modules\DynamicsModels\DynamicsYear;
+use Modules\Dynamics\Models\Opportunity;
+use Modules\Dynamics\Models\Municipality;
+use Packages\Dynamics\DynamicsConnector;
+use Packages\Dynamics\DynamicsModel;
 
 class Sandbox extends Command
 {
-    protected $signature = 'sandbox {--etl-years} {--dynamics} {--render}';
+    protected $signature = 'sandbox {--dynamics-samples} {--dynamics-definitions} {--dynamics-search} {--render}';
+
+    protected string $dynamicsEnv;
 
     public function handle()
     {
-        if ($this->option('etl-years')) {
-            $this->testEtlYears();
+        $this->dynamicsEnv = config('services.dynamics.env');
+
+        if ($this->option('dynamics-definitions')) {
+            $this->dynamicsDefinitions();
         }
 
-        if ($this->option('dynamics')) {
+        if ($this->option('dynamics-samples')) {
+            $this->dynamicsSamples();
+        }
+
+        if ($this->option('dynamics-search')) {
             $this->testDynamicsSearch();
         }
 
@@ -32,55 +53,110 @@ class Sandbox extends Command
         return self::SUCCESS;
     }
 
-    private function testEtlYears(): void
+    private function dynamicsSamples(): void
     {
-        $year = DynamicsYear::new();
+        $this->call('log:clear');
 
-        $path = "dynamics/years.json";
+        $dynmodels = [
+            'account' => Account::new(),
+            'business' => Business::new(),
+            'contact' => Contact::new(),
+            'country' => Country::new(),
+            'lead' => Lead::new(),
+            'municipality' => Municipality::new(),
+            'opportunity' => Opportunity::new(),
+            'product' => Product::new(),
+            'program' => Program::new(),
+            'province' => Province::new(),
+            'training-area' => TrainingArea::new(),
+            'user' => User::new(),
+            'year' => Year::new(),
+        ];
 
-        $this->info("leyendo years...");
+        foreach ($dynmodels as $entityName => $dynmodel) {
+            $path = "dynamics/{$entityName}-samples-{$this->dynamicsEnv}.json";
 
-        try {
-            $result = $year->select([
-                DynamicsYear::BIT_IDENTIFICADOR,
-                DynamicsYear::BIT_PERIODO,
-                DynamicsYear::BIT_PAIS,
-                DynamicsYear::BIT_COMIENZAEL,
-                DynamicsYear::BIT_TERMINAEL,
-                DynamicsYear::STATECODE,
-                DynamicsYear::STATUSCODE,
-            ])
-                ->orWhere(DynamicsYear::BIT_PERIODO, 'like', '%2023%')
-                ->orWhere(DynamicsYear::BIT_PERIODO, 'like', '%2024%')
-                ->orderBy(DynamicsYear::BIT_IDENTIFICADOR, 'asc')
-                ->output()
+            $this->info("Leyendo $entityName...");
+
+            $result = $dynmodel
+                ->disableCache()
+                ->compactResult(true)
+                ->count(10)
                 ->collection();
-        } catch (Exception $e) {
-            $result = ['error' => $e->getMessage()];
-        }
 
-        Storage::put($path, json_encode($result, JSON_PRETTY_PRINT));
+            Storage::put($path, json_encode($result, JSON_PRETTY_PRINT));
+        }
+    }
+
+    private function dynamicsDefinitions(): void
+    {
+        $dynModel = DynamicsModel::new();
+
+        $entities = [
+            'annotation',
+            'account',
+            'businessunit',
+            'contact',
+            'bit_pais',
+            'lead',
+            'bit_municipio',
+            'opportunity',
+            'product',
+            'bit_programaacademico',
+            'bit_provincia',
+            'bit_areadeformacion',
+            'systemuser',
+            'bit_cursoacademico',
+        ];
+
+        foreach ($entities as $entity) {
+            $this->info("Leyendo definiciones de $entity...");
+            $dynModel->setEntity($entity);
+
+            $metadaAttributes = $dynModel->metadataAttributes();
+            Storage::put(
+                "dynamics/{$entity}-attributes-metadata-{$this->dynamicsEnv}.json",
+                json_encode($metadaAttributes, JSON_PRETTY_PRINT)
+            );
+
+            $attributesSummary = $dynModel->attributesSummary();
+            Storage::put(
+                "dynamics/{$entity}-attributes-summary-{$this->dynamicsEnv}.json",
+                json_encode($attributesSummary, JSON_PRETTY_PRINT)
+            );
+
+            // $picklists = $dynModel->picklists();
+            // Storage::put(
+            //     "dynamics/picklists-$entity.json",
+            //     json_encode($picklists, JSON_PRETTY_PRINT)
+            // );
+        }
     }
 
     private function testDynamicsSearch(): void
     {
-        $contact = DynamicsModel::new('contact');
+        $this->call('log:clear');
+
+        $contact = Contact::new();
 
         $emails = [
             'isuka81@hotmail.com',
             'santifou@gmail.com',
-            'jesus.gambin@gmail.com',
+            'matias@enae.es',
             'santiago@enae.es',
         ];
 
         foreach ($emails as $email) {
-            $this->info("reading $email...");
-            Log::info("reading $email...");
+            $this->info("Searching $email...");
+            Log::info("Searching $email...");
             $result = $contact
-                ->select(['firstname', 'lastname', 'emailaddress1', 'emailaddress2'])
-                ->where('emailaddress1', 'eq', $email)
-                ->output(true)
+                ->select(['firstname', 'lastname', 'emailaddress1', 'emailaddress2', 'emailaddress3'])
+                ->orWhere('emailaddress1', 'eq', $email)
+                ->orWhere('emailaddress2', 'eq', $email)
+                ->orWhere('emailaddress3', 'eq', $email)
+                ->debug()
                 ->collection();
+
             Log::info(print_r($result, true));
         }
     }

@@ -1,14 +1,15 @@
 <?php
 
 return [
-
     'dynamics' => env('DYNAMICS_USE_SANDBOX')
         ? [
+            'env' => 'sandbox',
             'instance_uri' => env('DYNAMICS_SANDBOX_INSTANCE_URI'),
             'application_id' => env('DYNAMICS_SANDBOX_APPLICATION_ID'),
             'application_secret' => env('DYNAMICS_SANDBOX_APPLICATION_SECRET'),
         ]
         : [
+            'env' => 'production',
             'instance_uri' => env('DYNAMICS_INSTANCE_URI'),
             'application_id' => env('DYNAMICS_APPLICATION_ID'),
             'application_secret' => env('DYNAMICS_APPLICATION_SECRET'),

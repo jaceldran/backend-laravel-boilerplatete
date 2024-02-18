@@ -13,9 +13,7 @@ class AppServiceProvider extends ServiceProvider
      */
     public function register(): void
     {
-        $this->app->singleton(DynamicsConnector::class, function (Application $app) {
-            return new DynamicsConnector();
-        });
+        $this->app->singleton(DynamicsConnector::class, fn() => new DynamicsConnector());
     }
 
     /**

@@ -2,14 +2,15 @@
 
 namespace Packages\Dynamics;
 
-use Packages\Dataplay\Traits\Newable;
-use Service\Cache;
+use Carbon\Carbon;
 use AlexaCRM\Xrm\Entity;
 use AlexaCRM\WebAPI\Client;
 use AlexaCRM\Xrm\ColumnSet;
-use Packages\Dynamics\DynamicsQuery;
 use AlexaCRM\Xrm\EntityReference;
 use AlexaCRM\Xrm\EntityCollection;
+use Packages\Dynamics\DynamicsQuery;
+use AlexaCRM\WebAPI\MetadataRegistry;
+use Packages\Dataplay\Traits\Newable;
 use AlexaCRM\Xrm\Query\FetchExpression;
 use Packages\Dynamics\DynamicsConnector;
 
@@ -26,8 +27,6 @@ class DynamicsModel
 
     public const COMPACT = 1;
     public const NO_COMPACT = 0;
-
-    protected Client $client;
     protected DynamicsQuery $query;
     protected EntityCollection|array $result;
     protected string $entityName;
@@ -36,52 +35,147 @@ class DynamicsModel
     protected array $linkedAttributes = [];
     protected array $preserveAttributes = [];
     protected ?array $cache;
-    protected bool $cacheIsEnabled = false;
+    protected bool $isCacheDisabled = true;
+    protected Carbon $cacheExpiration;
 
     use Newable;
 
-    public function __construct()
+    public function __construct(protected ?Client $client = null)
     {
         if (!empty($this->entityName)) {
-            $this->query = new DynamicsQuery($this->entityName);
+            $this->setEntity($this->entityName);
         }
 
-        $this->client = DynamicsConnector::new()->client();
+        if (empty($this->client)) {
+            $connector = resolve(DynamicsConnector::class);
+            $this->setClient($connector->client());
+        }
+
+        $this->cacheExpiration = now()->addMinutes(15);
     }
 
-    // public function __construct(?string $entityName = null)
-    // {
-    //     if (!empty($entityName)) {
-    //         $this->entityName = $entityName;
-    //         $this->query = new DynamicsQuery($entityName);
-    //     }
-
-    //     $this->client = DynamicsConnector::new()->client();
-    // }
-
-    // public static function new(?string $entityName = null): static
-    // {
-    //     return new static($entityName);
-    // }
-
-    public function enableCache(): static
+    public function setEntity(string $entityName): static
     {
-        $this->cacheIsEnabled = true;
+        $this->entityName = $entityName;
+        $this->query = new DynamicsQuery($this->entityName);
 
         return $this;
+    }
+
+    public function setClient(Client $client): static
+    {
+        $this->client = $client;
+
+        return $this;
+    }
+
+    public function enableCache(?Carbon $expiration = null): static
+    {
+        $this->isCacheDisabled = false;
+        $this->cacheExpiration = $expiration ?? now()->addMinutes(15);
+
+        return $this;
+    }
+
+    public function disableCache(): static
+    {
+        $this->isCacheDisabled = true;
+
+        return $this;
+    }
+
+    public function metadataAttributes(): array
+    {
+        $cacheKey = config('services.dynamics.env') . '-' . "metadata-{$this->entityName}";
+        $metadata = cache($cacheKey);
+
+        if (empty($metadata)) {
+            $metadataRegistry = new MetadataRegistry($this->client);
+            $metadata = $metadataRegistry->getDefinition($this->entityName)->Attributes;
+            cache([$cacheKey => $metadata], now()->addDay());
+        }
+
+        return $metadata;
+    }
+
+    public function attributesSummary(): array
+    {
+        $attributesSummary = [];
+        $metadataAttributes = $this->metadataAttributes();
+
+        foreach ($metadataAttributes as $attributeName => $attribute) {
+            $picklist = [];
+            if ((string) $attribute->AttributeType === 'Picklist') {
+                $picklist = [];
+                $options = $attribute->OptionSet->Options;
+                foreach ($options as $key => $option) {
+                    $picklist[$key] = $option->Label->UserLocalizedLabel->Label;
+                }
+            }
+
+            $summary = [
+                'AttributeType' => $attribute->AttributeType,
+                'Display' => $attribute->DisplayName->UserLocalizedLabel->Label ?? '-',
+                'Description' => $attribute->Description->UserLocalizedLabel->Label ?? '-',
+                'EntityLogicalName' => $attribute->EntityLogicalName ?? '-',
+                'LogicalName' => $attribute->LogicalName ?? '-',
+                'IsRetrievable' => $attribute->IsRetrievable,
+                'IsSearchable' => $attribute->IsSearchable,
+                'IsSecured' => $attribute->IsSecured,
+                'IsValidForCreate' => $attribute->IsValidForCreate,
+                'IsValidForRead' => $attribute->IsValidForRead,
+                'IsValidForUpdate' => $attribute->IsValidForUpdate,
+                'Format' => $attribute->Format ?? '-',
+                'MaxLength' => $attribute->MaxLength ?? '-',
+            ];
+
+            if (!empty($picklist)) {
+                $summary['picklist'] = $picklist;
+            }
+
+            $attributesSummary[$attributeName] = $summary;
+        }
+
+        return $attributesSummary;
+    }
+
+    public function picklists(): array
+    {
+        $picklists = [];
+        $metadataAttributes = $this->metadataAttributes();
+
+        foreach ($metadataAttributes as $attributeName => $attribute) {
+            if ((string) $attribute->AttributeType === 'Picklist') {
+                $picklist = [];
+                $options = $attribute->OptionSet->Options;
+                foreach ($options as $key => $option) {
+                    $picklist[$key] = $option->Label->UserLocalizedLabel->Label;
+                }
+
+                $picklists[$attributeName] = $picklist;
+            }
+        }
+
+        return $picklists;
     }
 
     public function collection(): EntityCollection|array
     {
         $query = $this->query->build();
         $fetchExpression = new FetchExpression($query);
-        $result = $this->client->RetrieveMultiple($fetchExpression);
+
+        $cacheKey = md5(config('services.dynamics.env') . '-' . $query);
+        $result = cache($cacheKey);
+
+        if ($this->isCacheDisabled || empty($result)) {
+            $result = $this->client->RetrieveMultiple($fetchExpression);
+            cache([$cacheKey => $result], $this->cacheExpiration);
+        }
 
         if ($this->compactResult) {
             $result = $this->compactCollection($result);
         }
 
-        // reset query
         $this->query = new DynamicsQuery($this->entityName);
 
         return $result;
@@ -89,28 +183,32 @@ class DynamicsModel
 
     public function read(string $entityId, ?array $columns = []): array|Entity|null
     {
-        // $cachePath = __DIR__ . "/../../dynamics/cache/{$this->entityName}-{$entityId}.json";
+        $cacheKey = md5($this->entityName . '-' . $entityId . '-' . implode('-', $columns));
+        $result = cache($cacheKey);
 
-        // $result = Cache::readJson($cachePath);
+        if ($this->isCacheDisabled || empty($result)) {
+            if (empty($columns)) {
+                $columnSet = new ColumnSet(true);
+            } else {
+                $columnSet = new ColumnSet($columns);
+            }
 
-        // if ($this->cacheIsDisabled || empty($result))
-        // {
-        if (empty($columns)) {
-            $columnSet = new ColumnSet(true);
-        } else {
-            $columnSet = new ColumnSet($columns);
+            $result = $this->client->Retrieve($this->entityName, $entityId, $columnSet);
+            cache([$cacheKey => $result], $this->cacheExpiration);
         }
-
-        $result = $this->client->Retrieve($this->entityName, $entityId, $columnSet);
 
         if ($this->compactResult && !empty($result)) {
             $result = $this->compactEntity($result);
         }
 
-        //     Cache::saveJson($cachePath, $result);
-        // }
-
         return $result;
+    }
+
+    public function compactResult(bool $compactResult): static
+    {
+        $this->compactResult = $compactResult;
+
+        return $this;
     }
 
     public function compactCollection(EntityCollection $entityCollection): array
@@ -166,7 +264,6 @@ class DynamicsModel
 
         return array_merge(['id' => $entity->Id], $values);
     }
-
     public function create(string $entityName, array $values): string
     {
         $entity = new Entity($entityName);
@@ -189,7 +286,6 @@ class DynamicsModel
 
         return $this->client->Create($entity);
     }
-
     public function update(string $entityName, string $entityId, array $values, ?array $linked = []): array
     {
         $entity = new Entity($entityName, $entityId);
