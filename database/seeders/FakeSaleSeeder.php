@@ -2,8 +2,8 @@
 
 namespace Database\Seeders;
 
-use App\Models\FakeSale;
 use Illuminate\Database\Seeder;
+use Modules\Enae\Models\FakeSale;
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 
 class FakeSaleSeeder extends Seeder

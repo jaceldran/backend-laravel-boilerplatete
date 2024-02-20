@@ -6,9 +6,9 @@ use Illuminate\Http\JsonResponse;
 use Illuminate\Support\Facades\Auth;
 use Modules\Shared\Requests\LoginRequest;
 
-class LoginController
+class AuthController
 {
-    public function __invoke(LoginRequest $request): JsonResponse
+    public function login(LoginRequest $request): JsonResponse
     {
         $credentials = $request->only(['email', 'password']);
 
@@ -26,5 +26,10 @@ class LoginController
             'ok' => false,
             'error' => 'Invalid credentials'
         ], 401);
+    }
+
+    public function logout(): void
+    {
+        Auth::logout();
     }
 }
