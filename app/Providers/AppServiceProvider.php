@@ -4,7 +4,7 @@ namespace App\Providers;
 
 use Illuminate\Support\ServiceProvider;
 use Illuminate\Contracts\Foundation\Application;
-use Packages\Dynamics\DynamicsConnector;
+use Libs\Dynamics\DynamicsConnector;
 
 class AppServiceProvider extends ServiceProvider
 {

@@ -3,13 +3,13 @@
 use Inertia\Inertia;
 
 use Illuminate\Support\Facades\Route;
-use App\Http\Controllers\LogController;
-use App\Http\Controllers\AuthController;
-use App\Http\Controllers\DiplomaController;
-use App\Http\Controllers\PaymentController;
-use App\Http\Controllers\FakeSaleController;
-use App\Http\Controllers\DashboardController;
-use App\Http\Controllers\EnrolmentController;
+use Modules\Web\Controllers\LogController;
+use Modules\Web\Controllers\AuthController;
+use Modules\Web\Controllers\DiplomaController;
+use Modules\Web\Controllers\PaymentController;
+use Modules\Web\Controllers\FakeSaleController;
+use Modules\Web\Controllers\DashboardController;
+use Modules\Web\Controllers\EnrolmentController;
 
 Route::resource('sales', FakeSaleController::class);
 

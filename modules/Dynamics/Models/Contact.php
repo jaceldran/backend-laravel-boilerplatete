@@ -2,7 +2,7 @@
 
 namespace Modules\Dynamics\Models;
 
-use Packages\Dynamics\DynamicsModel;
+use Libs\Dynamics\DynamicsModel;
 
 class Contact extends DynamicsModel
 {

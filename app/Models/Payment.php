@@ -2,7 +2,7 @@
 
 namespace App\Models;
 
-use Packages\Dataplay\Models\AppEloquentModel;
+use Libs\Dataplay\Models\AppEloquentModel;
 
 class Payment extends AppEloquentModel
 {
