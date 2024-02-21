@@ -1,16 +1,15 @@
 <?php
 
-namespace Modules\Enae\Models;
+namespace Modules\Payments\Models;
 
 use Libs\Dataplay\Models\AppEloquentModel;
 
-class Enrolment extends AppEloquentModel
+class Payment extends AppEloquentModel
 {
     protected $connection = 'service';
-    protected $table = 'enrolment_form';
+    protected $table = 'payment';
 
     protected $casts = [
         'data' => 'json',
-        'sync_log' => 'json',
     ];
 }

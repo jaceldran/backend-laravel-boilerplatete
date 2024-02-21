@@ -3,7 +3,7 @@
 namespace Modules\Web\Controllers;
 
 use Inertia\Inertia;
-use Illuminate\Http\Request;
+use Modules\Shared\Controllers\Controller;
 
 class LogController extends Controller
 {

@@ -23,6 +23,10 @@ class Kernel extends ConsoleKernel
     {
         $this->load(__DIR__ . '/Commands');
 
-        $this->commands = array_merge($this->commands, config('dynamics.commands'));
+        $this->commands = array_merge(
+            $this->commands,
+            config('dynamics.commands'),
+            config('enrolments.commands'),
+        );
     }
 }

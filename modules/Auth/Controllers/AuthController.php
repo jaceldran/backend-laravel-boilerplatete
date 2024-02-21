@@ -1,11 +1,12 @@
 <?php
 
-namespace Modules\Web\Controllers;
+namespace Modules\Auth\Controllers;
 
 use Inertia\Inertia;
 use Inertia\Response;
 use Illuminate\Support\Facades\Auth;
 use Modules\Shared\Requests\LoginRequest;
+use Modules\Shared\Controllers\Controller;
 
 class AuthController extends Controller
 {

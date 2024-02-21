@@ -1,6 +1,6 @@
 <?php
 
-namespace Modules\Web\Requests;
+namespace Modules\Enrolments\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
 

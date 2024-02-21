@@ -2,7 +2,7 @@
 
 namespace Libs\Dataplay\Contracts;
 
-interface EntityInterface
+interface DataplayEntityInterface
 {
     public function key(string $name, string $rules = 'required', mixed $value = null, ): static;
 

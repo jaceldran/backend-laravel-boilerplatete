@@ -3,10 +3,10 @@
 namespace Libs\Dataplay\Models;
 
 use Illuminate\Support\Facades\Validator;
-use Libs\Dataplay\Contracts\EntityInterface;
+use Libs\Dataplay\Contracts\DataplayEntityInterface;
 use Libs\Dataplay\Traits\Newable;
 
-class DataplayEntity implements EntityInterface
+class DataplayEntity implements DataplayEntityInterface
 {
     public const NAME = 'name';
     public const VALUE = 'value';
@@ -63,7 +63,17 @@ class DataplayEntity implements EntityInterface
 
     public function hashAttributes(array $attributes): string
     {
-        return md5(implode('-', array_column($attributes, self::VALUE)));
+        // prevent non scalar values
+        $values = array_column($attributes, self::VALUE);
+        foreach ($values as &$value) {
+            if (!is_scalar($value)) {
+                $value = json_encode($value);
+            }
+        }
+
+        return md5(implode('-', $values));
+
+        // return md5(implode('-', array_column($attributes, self::VALUE)));
     }
 
     public function values(): array

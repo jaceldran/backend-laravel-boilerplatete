@@ -1,11 +1,10 @@
 <?php
 
-namespace Modules\Dynamics\Workflows;
+namespace Modules\Shared\Workflows;
 
 use Libs\Dataplay\Workflow\Workflow;
 use Libs\Dataplay\Contracts\ReaderInterface;
 use Libs\Dataplay\Contracts\WriterInterface;
-// use Libs\Dataplay\Workflow\WorkflowException;
 use Libs\Dataplay\Workflow\WorkflowException;
 use Libs\Dataplay\Contracts\WithUpsertInterface;
 use Libs\Dataplay\Contracts\TransformerInterface;
@@ -51,6 +50,9 @@ class EtlWorkflow extends Workflow
                 function (Workflow $wf) {
                     $wf->context->info('Reading...');
                     $wf->data = $wf->reader->data();
+
+                    // $wf->context->info(print_r($wf->data->all(), true));
+                    // die();
                 }
             )
             ->addTask(
@@ -67,18 +69,19 @@ class EtlWorkflow extends Workflow
                 '',
                 function (Workflow $wf) {
                     $wf->context->info('Finish');
-                    $q = $wf->targetModel->newQuery()->where('data', 'like', '%2024%');
-                    $c = $q->count();
-
+                    // $q = $wf->targetModel->newQuery()->where('data', 'like', '%2024%');
+                    // $c = $q->count();
+        
                     $wf->logInfo(
-                        " - ($c) " . $q->toRawSql()
+                        ''
+                        // " - ($c) " . $q->toRawSql()
                         . '- Total read: ' . $wf->data->count()
                         //. ' - Total changes: ' . $wf->targetModel->where('has_changes', true)->count()
                     );
                 }
             )
             ->setErrorHandler(
-                fn($exception, Workflow $wf) => $wf->logError(
+                fn(WorkflowException $exception, Workflow $wf) => $wf->logError(
                     $exception->getMessage()
                     . ' - file: ' . $exception->getFile()
                     . ' line: ' . $exception->getLine()

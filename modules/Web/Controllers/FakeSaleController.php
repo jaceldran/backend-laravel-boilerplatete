@@ -6,6 +6,7 @@ use Inertia\Inertia;
 use Illuminate\Http\Request;
 use Libs\Highcharts\HighCharts;
 use Modules\Enae\Models\FakeSale;
+use Modules\Shared\Controllers\Controller;
 
 class FakeSaleController extends Controller
 {

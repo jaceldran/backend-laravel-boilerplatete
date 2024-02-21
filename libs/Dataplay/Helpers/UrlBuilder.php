@@ -12,7 +12,7 @@ class UrlBuilder
     protected array $params;
     protected string $url;
 
-    protected function __construct(protected string $urlbase)
+    public function __construct(protected string $urlbase)
     {
         $this->urlbase = $urlbase;
     }

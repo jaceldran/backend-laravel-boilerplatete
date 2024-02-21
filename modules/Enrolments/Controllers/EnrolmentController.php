@@ -1,12 +1,12 @@
 <?php
 
-namespace Modules\Web\Controllers;
+namespace Modules\Enrolments\Controllers;
 
 use Inertia\Inertia;
-use Illuminate\Http\Request;
-use Modules\Enae\Models\Enrolment;
-use Modules\Web\Requests\StoreEnrolmentRequest;
-use Modules\Web\Requests\UpdateEnrolmentRequest;
+use Modules\Enrolments\Models\Enrolment;
+use Modules\Shared\Controllers\Controller;
+use Modules\Enrolments\Requests\StoreEnrolmentRequest;
+use Modules\Enrolments\Requests\UpdateEnrolmentRequest;
 
 class EnrolmentController extends Controller
 {

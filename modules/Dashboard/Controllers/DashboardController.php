@@ -1,12 +1,13 @@
 <?php
 
-namespace Modules\Web\Controllers;
+namespace Modules\Dashboard\Controllers;
 
 use Inertia\Inertia;
 use Libs\Highcharts\HighCharts;
 use Modules\Enae\Models\FakeSale;
+use Modules\Shared\Controllers\Controller;
 
-class DashboardController
+class DashboardController extends Controller
 {
     public function index()
     {

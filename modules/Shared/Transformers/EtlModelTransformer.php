@@ -1,24 +1,23 @@
 <?php
 
-namespace Modules\Dynamics\Transformers;
+namespace Modules\Shared\Transformers;
 
 use Libs\Dataplay\Traits\Newable;
 use Modules\Shared\Models\EtlModel;
 use Libs\Dataplay\Contracts\DataplayEntityInterface;
+use Libs\Dataplay\Contracts\WithDataplayEntity;
 use Libs\Dataplay\Contracts\TransformerInterface;
 
-class EtlModelTransformer implements TransformerInterface
+abstract class EtlModelTransformer implements TransformerInterface, WithDataplayEntity
 {
     use Newable;
 
     protected DataplayEntityInterface $entity;
     protected array $tags = [];
 
-    public function setEntity($entity): static
+    public function __construct()
     {
-        $this->entity = $entity;
-
-        return $this;
+        $this->entity = $this->dataplayEntity();
     }
 
     public function setTags(array $tags): static

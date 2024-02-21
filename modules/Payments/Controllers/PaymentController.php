@@ -1,11 +1,13 @@
 <?php
 
-namespace Modules\Web\Controllers;
+namespace Modules\Payments\Controllers;
 
 use Inertia\Inertia;
-use Modules\Enae\Models\Payment;
-use Modules\Web\Requests\StorePaymentRequest;
-use Modules\Web\Requests\UpdatePaymentRequest;
+use Modules\Payments\Models\Payment;
+use Modules\Shared\Controllers\Controller;
+use Modules\Payments\Requests\StorePaymentRequest;
+use Modules\Payments\Requests\UpdatePaymentRequest;
+
 
 class PaymentController extends Controller
 {

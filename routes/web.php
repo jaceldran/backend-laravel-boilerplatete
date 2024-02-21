@@ -4,14 +4,12 @@ use Inertia\Inertia;
 
 use Illuminate\Support\Facades\Route;
 use Modules\Web\Controllers\LogController;
-use Modules\Web\Controllers\AuthController;
-use Modules\Web\Controllers\DiplomaController;
-use Modules\Web\Controllers\PaymentController;
-use Modules\Web\Controllers\FakeSaleController;
-use Modules\Web\Controllers\DashboardController;
-use Modules\Web\Controllers\EnrolmentController;
 
-Route::resource('sales', FakeSaleController::class);
+use Modules\Auth\Controllers\AuthController;
+use Modules\Diplomas\Controllers\DiplomaController;
+use Modules\Payments\Controllers\PaymentController;
+use Modules\Dashboard\Controllers\DashboardController;
+use Modules\Enrolments\Controllers\EnrolmentController;
 
 Route::get('/login', [AuthController::class, 'form'])->name('login');
 Route::get('/logout', [AuthController::class, 'logout'])->name('auth.logout');
