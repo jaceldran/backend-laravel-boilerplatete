@@ -42,13 +42,13 @@ class EtlWorkflow extends Workflow
         return $this->set('writer', $writer);
     }
 
-    public function run(): static
+    public function run()//: static
     {
         $this
             ->addTask(
                 'Reading ' . class_basename($this->reader),
                 function (Workflow $wf) {
-                    $wf->context->info('Reading...');
+                    dump('Reading...');// $wf->context->info('Reading...');
                     $wf->data = $wf->reader->data();
 
                     // $wf->context->info(print_r($wf->data->all(), true));
@@ -58,7 +58,8 @@ class EtlWorkflow extends Workflow
             ->addTask(
                 'Writing ' . class_basename($this->writer),
                 function ($wf) {
-                    $wf->context->info('Writing...');
+                    // $wf->context->info('Writing...');
+                    dump('Writing...');
                     $wf->writer
                         ->setTargetModel($wf->targetModel)
                         ->setData($wf->data)
@@ -68,16 +69,19 @@ class EtlWorkflow extends Workflow
             ->after(
                 '',
                 function (Workflow $wf) {
-                    $wf->context->info('Finish');
+                    dump('Finish');
+                    dump("Total read: " . $wf->data->count());
+
+                    // $wf->context->info('Finish');
                     // $q = $wf->targetModel->newQuery()->where('data', 'like', '%2024%');
                     // $c = $q->count();
         
-                    $wf->logInfo(
-                        ''
-                        // " - ($c) " . $q->toRawSql()
-                        . '- Total read: ' . $wf->data->count()
-                        //. ' - Total changes: ' . $wf->targetModel->where('has_changes', true)->count()
-                    );
+                    // $wf->logInfo(
+                    //     ''
+                    //     // " - ($c) " . $q->toRawSql()
+                    //     // . '- Total read: ' .
+                    //     //. ' - Total changes: ' . $wf->targetModel->where('has_changes', true)->count()
+                    // );
                 }
             )
             ->setErrorHandler(

@@ -11,7 +11,7 @@ class DynamicsEtl extends Command
 
     public function handle()
     {
-        EtlYearWorkflow::start($this);
+        $this->info(__METHOD__);
 
         return self::SUCCESS;
     }

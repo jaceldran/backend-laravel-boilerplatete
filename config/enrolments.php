@@ -1,9 +1,9 @@
 <?php
 
-use Modules\Enrolments\Commands\ApiEnrolmentEtl;
+use Modules\Enrolments\Commands\EnrolmentEtlCommand;
 
 return [
     'commands' => [
-        ApiEnrolmentEtl::class,
+        EnrolmentEtlCommand::class,
     ]
 ];

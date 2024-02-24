@@ -1,6 +1,6 @@
 <?php
 
-namespace Modules\Enrolments\Readers;
+namespace Modules\Payments\Readers;
 
 use Libs\Dataplay\Helpers\UrlBuilder;
 use Libs\Dataplay\Traits\Newable;
@@ -8,7 +8,7 @@ use Illuminate\Support\Facades\Http;
 use Illuminate\Support\LazyCollection;
 use Libs\Dataplay\Contracts\ReaderInterface;
 
-class ApiEnrolmentReader implements ReaderInterface
+class PaymentApiReader implements ReaderInterface
 {
     use Newable;
 
@@ -18,7 +18,7 @@ class ApiEnrolmentReader implements ReaderInterface
 
             $endpoint = UrlBuilder::new('https://service.enae.es/dynamics/api')
                 ->addSegment('exports')
-                ->addSegment('enrolments')
+                ->addSegment('payments')
                 ->build();
 
             $result = Http::get($endpoint)->json();

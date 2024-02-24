@@ -66,7 +66,7 @@
                 <TableTh>method</TableTh>
                 <TableTh class="attempts">attempts</TableTh>
                 <TableTh>result</TableTh>
-                <TableTh class="amount">amount</TableTh>
+                <TableTh class="text-right">amount</TableTh>
                 <TableTh class="actions"></TableTh>
             </TableRow>
         </TableHeader>
@@ -109,7 +109,7 @@
                     <TableTd class="method">{method}</TableTd>
                     <TableTd class="attempts">{attempts}</TableTd>
                     <TableTd class="result">{result}</TableTd>
-                    <TableTd class="amount">
+                    <TableTd class="text-right">
                         {numberFormat(amount, { currency: "EUR" })}
                     </TableTd>
                     <TableTd class="actions align-middle p-0">

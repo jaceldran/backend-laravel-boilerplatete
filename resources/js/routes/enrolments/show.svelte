@@ -41,13 +41,5 @@
 <Main>
     <Breadcrumb {links} />
 
-    <div class="text-lg bg-neon-50 rounded my-4 p-2">
-        <div>{contactName()}</div>
-        <div>{data.contact_email}</div>
-        <div class="capitalize">
-            {productName().toLowerCase()}
-        </div>
-    </div>
-
     <ObjectRender {data} />
 </Main>

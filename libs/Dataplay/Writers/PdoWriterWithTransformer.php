@@ -65,7 +65,8 @@ class PdoWriterWithTransformer implements WriterWithTransformerInterface
                         );
                     } catch(\Exception $exception) {
                         $error = $exception->getMessage();
-                        Log::error($error);
+                        Log::error( $error );
+                        dd(substr($error,0, 150));
                     }
                 }
             );

@@ -4,6 +4,7 @@
     import { es } from "date-fns/locale";
     import Breadcrumb from "@/components/ui/Breadcrumb.svelte";
     import ToolBar from "@/components/ui/ToolBar.svelte";
+    import Navigation from "@/components/ui/Navigation.svelte";
     import SearchInput from "@/components/ui/SearchInput.svelte";
     import TableContent from "@/components/ui/TableContent.svelte";
     import TableHeader from "@/components/ui/TableHeader.svelte";
@@ -14,14 +15,15 @@
     import Main from "@/layouts/App.svelte";
     import Pagination from "@/components/ui/Pagination.svelte";
     import Icon from "@/components/ui/Icon.svelte";
-    import { faFileLines, faEye } from "@fortawesome/free-solid-svg-icons";
+    import {
+        faFileLines,
+        faEye,
+        faRefresh,
+    } from "@fortawesome/free-solid-svg-icons";
 
     import { dateFormat, isDate } from "@/utils.js";
-    import { color } from "highcharts";
 
     export let enrolments;
-
-    const links = [{ text: "Enrolments", href: "#" }];
 
     const productName = (data) => {
         if (data.hasOwnProperty("product")) {
@@ -62,15 +64,25 @@
 
         return color;
     };
+
+    const routes = [
+        { text: "Enrolments", href: "/enrolments", active: true },
+        {
+            text: "Notifications",
+            href: "/enrolments/notifications",
+            active: false,
+        },
+    ];
 </script>
 
 <Main>
     <ToolBar class="justify-between">
-        <div>
-            <button class="action">Action 1</button>
-            <button class="action">Action 2</button>
-            <button class="action">Action 3</button>
-        </div>
+        <section class="flex gap-2">
+            <button class="rounded-full bg-neon-100 px-4">
+                <Icon icon={faRefresh} class="" />
+            </button>
+            <Navigation class="horizontal" {routes} />
+        </section>
         <SearchInput url="/enrolments" />
     </ToolBar>
 
@@ -100,6 +112,7 @@
 
                         <span class="">
                             {dateFormat(created_at, {
+                                weekday: "short",
                                 hour: "numeric",
                                 minute: "numeric",
                             })}
@@ -132,7 +145,14 @@
                                 : "-"}
                         </span>
 
-                        <div class="text-sm">intentos: {sync_attempts}</div>
+                        <div class="text-sm">
+                            intentos: <span
+                                class=" px-1 rounded-full {sync_attempts < 5
+                                    ? ''
+                                    : 'bg-[indianred]  text-white'}"
+                                >{sync_attempts}</span
+                            >
+                        </div>
                     </TableTd>
 
                     <TableTd class="actions flex justify-end items-center">

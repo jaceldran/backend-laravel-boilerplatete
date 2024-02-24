@@ -27,6 +27,7 @@ class Kernel extends ConsoleKernel
             $this->commands,
             config('dynamics.commands'),
             config('enrolments.commands'),
+            config('payments.commands'),
         );
     }
 }

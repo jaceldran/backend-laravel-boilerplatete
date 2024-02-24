@@ -3,6 +3,7 @@
 namespace Modules\Enrolments\Controllers;
 
 use Inertia\Inertia;
+use Modules\Enrolments\Models\DynamicsEntity;
 use Modules\Enrolments\Models\Enrolment;
 use Modules\Shared\Controllers\Controller;
 use Modules\Enrolments\Requests\StoreEnrolmentRequest;
@@ -45,6 +46,29 @@ class EnrolmentController extends Controller
 
     public function show(Enrolment $enrolment)
     {
+        $entities = ['lead', 'contact', 'opportunity'];
+
+        foreach ($entities as $entityName) {
+            $column = "{$entityName}_id";
+            $prop = "dynamics_{$entityName}";
+
+            if ($entityId = $enrolment->{$column}) {
+                $data[$prop] = [
+                    'error' => "$entityName $entityId not found"
+                ];
+
+                $found = DynamicsEntity::new()->newQuery()
+                    ->where('entity_name', $entityName)
+                    ->where('entity_id', $entityId)
+                    ->get()
+                    ->first();
+
+                if ($found) {
+                    $data[$prop] = $found->data;
+                }
+            }
+        }
+
         $data['enrolment'] = $enrolment;
 
         return Inertia::render('enrolments/show', $data);

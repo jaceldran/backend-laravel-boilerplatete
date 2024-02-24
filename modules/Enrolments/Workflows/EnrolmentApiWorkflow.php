@@ -5,26 +5,23 @@ namespace Modules\Enrolments\Workflows;
 use Illuminate\Console\Command;
 use Modules\Shared\Models\EtlModel;
 use Modules\Shared\Workflows\EtlWorkflow;
-use Modules\Enrolments\Readers\ApiEnrolmentReader;
+use Modules\Enrolments\Readers\EnrolmentApiReader;
 use Libs\Dataplay\Writers\PdoWriterWithTransformer;
-use Modules\Enrolments\Transformer\ApiEnrolmentTransformer;
+use Modules\Enrolments\Transformer\EnrolmentApiTransformer;
 
-class ApiEnrolmentWorkflow extends EtlWorkflow
+class EnrolmentApiWorkflow extends EtlWorkflow
 {
     public static function start(Command $context): void
     {
         $tags = [];
 
         EtlWorkflow::new(class_basename(__CLASS__))
-            ->before('reset', function (EtlWorkflow $wf) {
-                $wf->targetModel->reset("true");
-            })
-            ->set('context', $context)
             ->setTargetModel(EtlModel::new('enrolments'))
-            ->setReader(ApiEnrolmentReader::new())
+            ->setReader(EnrolmentApiReader::new())
+            ->setReader(EnrolmentApiReader::new())
             ->setWriter(
                 PdoWriterWithTransformer::new(),
-                ApiEnrolmentTransformer::new()->setTags($tags)
+                EnrolmentApiTransformer::new()->setTags($tags)
             )
             ->run();
     }

@@ -59,8 +59,8 @@ class HandleInertiaRequests extends Middleware
         $routes['/enrolments'] = ['text' => 'Enrolments'];
         $routes['/payments'] = ['text' => 'Payments'];
         $routes['/diplomas'] = ['text' => 'Diplomas'];
-        // $routes['/logs'] = ['text' => 'Logs'];
-        $routes['/dashboards'] = ['text' => 'Dashboards'];
+        $routes['/dynamics'] = ['text' => 'Dynamics']; // external apis
+        // $routes['/dashboards'] = ['text' => 'Dashboards'];
 
         foreach ($routes as $routeUri => &$route) {
             $route['href'] = $routeUri;

@@ -157,7 +157,7 @@ class Workflow
         }
     }
 
-    public function run(): static
+    public function run()//: static
     {
         $allTasks = [
             ...$this->tasks[self::POOL_BEFORE] ?? [],
@@ -192,7 +192,7 @@ class Workflow
 
         $this->finish("Workflow finish {$this->name}");
 
-        return $this;
+        // return $this;
     }
 
     public function call(Workflow $workflow, bool|callable $when = true, Workflow $workflowElse = null): static

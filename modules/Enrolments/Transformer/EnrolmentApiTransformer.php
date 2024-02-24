@@ -5,7 +5,7 @@ namespace Modules\Enrolments\Transformer;
 use Libs\Dataplay\Models\DataplayEntity;
 use Modules\Shared\Transformers\EtlModelTransformer;
 
-class ApiEnrolmentTransformer extends EtlModelTransformer
+class EnrolmentApiTransformer extends EtlModelTransformer
 {
     public function dataplayEntity(): DataplayEntity
     {
@@ -23,7 +23,6 @@ class ApiEnrolmentTransformer extends EtlModelTransformer
             ->data('sync_attempts', 'nullable')
             ->data('sync_log', 'nullable')
             ->data('sync_at', 'nullable')
-            ->data('created_at', 'nullable')
-        ;
+            ->data('created_at', 'nullable');
     }
 }

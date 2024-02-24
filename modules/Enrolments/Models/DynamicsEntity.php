@@ -1,40 +1,36 @@
 <?php
 
-namespace Modules\Payments\Models;
+namespace Modules\Enrolments\Models;
 
 use Libs\Dataplay\Contracts\WithUpsertInterface;
 use Libs\Dataplay\Models\AppEloquentModel;
 use Libs\Dataplay\Traits\Newable;
 
-class Payment extends AppEloquentModel implements WithUpsertInterface
+class DynamicsEntity extends AppEloquentModel implements WithUpsertInterface
 {
     use Newable;
 
     protected $connection = 'service';
-    protected $table = 'payment';
+    protected $table = 'dynamics_entity';
 
     protected $casts = [
         'data' => 'json',
+        'alias' => 'json',
     ];
 
     public function upsertUniqueColumns(): array
     {
         return [
-            'source_type',
-            'source_name',
-            'source_id',
+            'entity_name',
+            'entity_id',
         ];
     }
 
     public function upsertUpdateColumns(): array
     {
         return [
-            'reference',
-            'method',
-            'result',
-            'amount',
-            'attempts',
             'data',
+            'alias',
             self::UPDATED_AT => date('Y-m-d H:i:s'),
         ];
     }

@@ -38,17 +38,17 @@
 </script>
 
 <form
-    class="flex bg-neon-100 dark:bg-neon-900 dark:text-green-300 rounded-full"
+    class="flex bg-neon-100 hover:bg-neon-150 dark:bg-neon-900 dark:text-green-300 rounded-full"
     on:submit|preventDefault={submit}
 >
     <input
         type="search"
         name="query"
-        class="h-8 outline-none px-4 bg-transparent"
+        class="h-10 outline-none px-4 bg-transparent"
         bind:value={query}
         on:input={debounce}
     />
-    <button type="submit" class="px-3 h-8">
+    <button type="submit" class="px-3 h-10">
         <Icon
             icon={faMagnifyingGlass}
             class="text-neon-light-darker dark:text-neon-light-medium"
