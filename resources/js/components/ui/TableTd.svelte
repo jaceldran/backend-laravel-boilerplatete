@@ -1,3 +1,3 @@
-<td class="py-3 px-1 md {$$props.class}">
+<td class="py-2 px-1 md {$$props.class}">
     <slot />
 </td>

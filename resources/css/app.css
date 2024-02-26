@@ -8,9 +8,16 @@
 @tailwind components;
 @tailwind utilities;
 
-
 h1.text-hero {
     @apply my-4 text-6xl font-extrabold tracking-[-4px] border-b-4;
+}
+
+h2 {
+    @apply my-4 text-2xl font-semibold text-neon-400 ;
+}
+
+.wmin {
+    @apply w-1 whitespace-nowrap;
 }
 
 /* fakes */

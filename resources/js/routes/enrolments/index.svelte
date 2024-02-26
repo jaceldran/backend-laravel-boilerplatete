@@ -2,7 +2,6 @@
     import { router, inertia } from "@inertiajs/svelte";
     import { formatDistanceToNow } from "date-fns";
     import { es } from "date-fns/locale";
-    import Breadcrumb from "@/components/ui/Breadcrumb.svelte";
     import ToolBar from "@/components/ui/ToolBar.svelte";
     import Navigation from "@/components/ui/Navigation.svelte";
     import SearchInput from "@/components/ui/SearchInput.svelte";
@@ -24,6 +23,7 @@
     import { dateFormat, isDate } from "@/utils.js";
 
     export let enrolments;
+    export let q;
 
     const productName = (data) => {
         if (data.hasOwnProperty("product")) {
@@ -73,17 +73,18 @@
             active: false,
         },
     ];
+    const breadcrumbLinks = [{ text: "Enrolments", href: "/enrolments" }];
 </script>
 
-<Main>
+<Main {breadcrumbLinks}>
     <ToolBar class="justify-between">
+        <Navigation class="horizontal subnav" {routes} />
         <section class="flex gap-2">
             <button class="rounded-full bg-neon-100 px-4">
                 <Icon icon={faRefresh} class="" />
             </button>
-            <Navigation class="horizontal" {routes} />
+            <SearchInput url="/enrolments" {q} />
         </section>
-        <SearchInput url="/enrolments" />
     </ToolBar>
 
     <TableContent>
@@ -91,7 +92,6 @@
             <TableRow>
                 <TableTh>Entrada</TableTh>
                 <TableTh>Solicitante</TableTh>
-                <!-- <TableTh class="hidden lg:table-cell">contact_name</TableTh> -->
                 <TableTh>Programa</TableTh>
                 <TableTh>Sincronización</TableTh>
                 <TableTh></TableTh>

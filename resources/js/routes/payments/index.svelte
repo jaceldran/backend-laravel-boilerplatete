@@ -1,6 +1,7 @@
 <script>
     import { router, inertia } from "@inertiajs/svelte";
     import ToolBar from "@/components/ui/ToolBar.svelte";
+    import Navigation from "@/components/ui/Navigation.svelte";
     import SearchInput from "@/components/ui/SearchInput.svelte";
     import TableContent from "@/components/ui/TableContent.svelte";
     import TableHeader from "@/components/ui/TableHeader.svelte";
@@ -11,12 +12,13 @@
     import MainContent from "@/layouts/App.svelte";
     import Pagination from "@/components/ui/Pagination.svelte";
     import Icon from "@/components/ui/Icon.svelte";
-    import { faEye } from "@fortawesome/free-solid-svg-icons";
+    import { faEye, faRefresh } from "@fortawesome/free-solid-svg-icons";
     import { dateFormat, jsonRender, numberFormat } from "@/utils.js";
     import { formatDistanceToNow } from "date-fns";
     import { es } from "date-fns/locale";
 
     export let payments;
+    export let q;
 
     const paymentStatusColor = (source_type, method, attempts, result) => {
         let color = "bg-[silver] dark:bg-white";
@@ -45,16 +47,20 @@
 
         return color;
     };
+
+    const breadcrumbLinks = [{ text: "Payments", href: "/payments" }];
+    const routes = [{ text: "Payments", href: "/payments", active: true }];
 </script>
 
-<MainContent>
+<MainContent {breadcrumbLinks}>
     <ToolBar class="justify-between">
-        <div>
-            <button class="action">Action 1</button>
-            <button class="action">Action 2</button>
-            <button class="action">Action 3</button>
-        </div>
-        <SearchInput url="/payments" />
+        <Navigation class="horizontal subnav" {routes} />
+        <section class="flex gap-2">
+            <button class="rounded-full bg-neon-100 px-4">
+                <Icon icon={faRefresh} class="" />
+            </button>
+            <SearchInput url="/payments" {q} />
+        </section>
     </ToolBar>
 
     <TableContent>

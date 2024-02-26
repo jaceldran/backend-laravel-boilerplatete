@@ -6,21 +6,25 @@
     export let size;
     export let color;
     export let hover;
+    export let text;
 
     color = color || "text-neutral-400 ";
     hover = hover || "hover:text-neutral-500 dark:hover:text-neon-700";
 
     // Configurar FontAwesome
-    config.autoReplaceSvg = "nest";
+    // config.autoReplaceSvg = "nest";
 
     // Importar el ícono
-    library.add(icon);
+    // library.add(icon);
 
     // Cargar el DOM
-    dom.watch();
+    // dom.watch();
 </script>
 
-<Fa {icon} {size} class="{color} {hover} {$$props.class}" />
+<div class="{color} {hover}{$$props.class} flex {text ? 'gap-2' : ''}">
+    <span>{text || ""}</span>
+    <Fa {icon} {size} class={$$props.class} />
+</div>
 
 <style>
     .fa-spin {

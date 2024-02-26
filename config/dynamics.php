@@ -24,4 +24,22 @@ $dynamics['commands'] = [
     DynamicsSandbox::class,
 ];
 
+$dynamics['models'] = [
+    // 'account',
+    // 'annotation',
+    'bit_areadeformacion',
+    'bit_cursoacademico',
+    'bit_municipio',
+    'bit_pais',
+    'bit_programaacademico',
+    'bit_provincia',
+    // 'business',
+    'contact',
+    'lead',
+    'opportunity',
+    'product',
+    // 'systemuser',
+    // 'user',
+];
+
 return $dynamics;

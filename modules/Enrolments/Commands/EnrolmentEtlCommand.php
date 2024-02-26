@@ -30,12 +30,6 @@ class EnrolmentEtlCommand extends Command
         $this->dynamicsEntityWorkflow();
     }
 
-    private function dynamicsEntityWorkflow(): void
-    {
-        $this->info(DynamicsEntityWorkflow::class);
-        DynamicsEntityWorkflow::start($this);
-    }
-
     private function apiWorkflow(): void
     {
         $this->info(EnrolmentApiWorkflow::class);
@@ -46,5 +40,11 @@ class EnrolmentEtlCommand extends Command
     {
         $this->info(EnrolmentEtlWorkflow::class);
         EnrolmentEtlWorkflow::start($this);
+    }
+
+    private function dynamicsEntityWorkflow(): void
+    {
+        $this->info(DynamicsEntityWorkflow::class);
+        DynamicsEntityWorkflow::start($this);
     }
 }

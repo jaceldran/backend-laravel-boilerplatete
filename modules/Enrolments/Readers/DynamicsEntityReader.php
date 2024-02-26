@@ -49,6 +49,8 @@ class DynamicsEntityReader implements ReaderInterface
                     continue;
                 }
 
+                $entity['entity_name'] = $entityName;
+
                 $this->data[] = $entity;
             }
         }

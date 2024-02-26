@@ -84,7 +84,7 @@ class DynamicsModel
         return $this;
     }
 
-    public function metadataAttributes(): array
+    public function metadata(): array
     {
         $cacheKey = config('services.dynamics.env') . '-' . "metadata-{$this->entityName}";
         $metadata = cache($cacheKey);
@@ -98,22 +98,28 @@ class DynamicsModel
         return $metadata;
     }
 
-    public function attributesSummary(): array
+    public function metadataSummary(): array
     {
-        $attributesSummary = [];
-        $metadataAttributes = $this->metadataAttributes();
+        $summary = [];
+        $metadata = $this->metadata();
 
-        foreach ($metadataAttributes as $attributeName => $attribute) {
+        foreach ($metadata as $attributeName => $attribute) {
+            // este tipo de atributo parece vinculado a los de tipo
+            // picklist pero no aportan ninguna info relevante.
+            if ((string) $attribute->AttributeType === 'Virtual') {
+                continue;
+            }
+
+
             $picklist = [];
             if ((string) $attribute->AttributeType === 'Picklist') {
-                $picklist = [];
                 $options = $attribute->OptionSet->Options;
                 foreach ($options as $key => $option) {
                     $picklist[$key] = $option->Label->UserLocalizedLabel->Label;
                 }
             }
 
-            $summary = [
+            $attribute = [
                 'AttributeType' => $attribute->AttributeType,
                 'Display' => $attribute->DisplayName->UserLocalizedLabel->Label ?? '-',
                 'Description' => $attribute->Description->UserLocalizedLabel->Label ?? '-',
@@ -130,33 +136,13 @@ class DynamicsModel
             ];
 
             if (!empty($picklist)) {
-                $summary['picklist'] = $picklist;
+                $attribute['Picklist'] = $picklist;
             }
 
-            $attributesSummary[$attributeName] = $summary;
+            $summary[$attributeName] = $attribute;
         }
 
-        return $attributesSummary;
-    }
-
-    public function picklists(): array
-    {
-        $picklists = [];
-        $metadataAttributes = $this->metadataAttributes();
-
-        foreach ($metadataAttributes as $attributeName => $attribute) {
-            if ((string) $attribute->AttributeType === 'Picklist') {
-                $picklist = [];
-                $options = $attribute->OptionSet->Options;
-                foreach ($options as $key => $option) {
-                    $picklist[$key] = $option->Label->UserLocalizedLabel->Label;
-                }
-
-                $picklists[$attributeName] = $picklist;
-            }
-        }
-
-        return $picklists;
+        return $summary;
     }
 
     public function collection(): EntityCollection|LazyCollection

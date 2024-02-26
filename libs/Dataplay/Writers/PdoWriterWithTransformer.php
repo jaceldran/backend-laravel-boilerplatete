@@ -47,13 +47,18 @@ class PdoWriterWithTransformer implements WriterWithTransformerInterface
         $targetModel = $this->targetModel;
         $transformer = $this->transformer ?? null;
 
+        // dd($this->targetModel->getTable(),__METHOD__);
+
         $this->data
             ->chunk($this->chunkSize)
             ->each(
                 function ($chunk) use ($targetModel, $transformer) {
                     if ($transformer) {
                         $chunk = $chunk->map(
-                            fn($item) => $transformer->handle($item)
+                            fn($item, $key) => $transformer->handle($item)
+                            // function ($item, $key) use($transformer) {
+                            //     return $transformer->handle($item);
+                            // }
                         );
                     }
 
@@ -66,7 +71,7 @@ class PdoWriterWithTransformer implements WriterWithTransformerInterface
                     } catch(\Exception $exception) {
                         $error = $exception->getMessage();
                         Log::error( $error );
-                        dd(substr($error,0, 150));
+                        dd(substr($error,0, 300));
                     }
                 }
             );

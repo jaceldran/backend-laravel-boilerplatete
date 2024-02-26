@@ -11,6 +11,10 @@ use Modules\Enrolments\Transformer\EnrolmentApiTransformer;
 
 class EnrolmentApiWorkflow extends EtlWorkflow
 {
+    /**
+     * Obtiene los enrolments actuales de la api y los guarda
+     * en etl.enrolments.
+     */
     public static function start(Command $context): void
     {
         $tags = [];
@@ -19,11 +23,10 @@ class EnrolmentApiWorkflow extends EtlWorkflow
             ->setTargetModel(EtlModel::new('enrolments'))
             ->setReader(EnrolmentApiReader::new())
             ->setReader(EnrolmentApiReader::new())
-            ->setWriter(
+            ->setWriterWithTransformer(
                 PdoWriterWithTransformer::new(),
                 EnrolmentApiTransformer::new()->setTags($tags)
-            )
-            ->run();
+            )->run();
     }
 
 }

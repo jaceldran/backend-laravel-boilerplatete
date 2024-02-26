@@ -64,12 +64,14 @@ class EnrolmentController extends Controller
                     ->first();
 
                 if ($found) {
-                    $data[$prop] = $found->data;
+                    $data[$prop] = $found;
                 }
             }
         }
 
         $data['enrolment'] = $enrolment;
+
+        // return $data;
 
         return Inertia::render('enrolments/show', $data);
     }

@@ -44,7 +44,7 @@
             {key}
         </div>
         <div
-            class="whitespace-break-spaces p-2 border-b border-neon-100 dark:border-neon-500 col-span-3"
+            class="whitespace-break-spaces break-words p-2 border-b border-neon-100 dark:border-neon-500 col-span-3"
         >
             {#if value && typeof value === "object"}
                 <div class="grid grid-cols-4">

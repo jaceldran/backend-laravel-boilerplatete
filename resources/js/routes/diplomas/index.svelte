@@ -34,10 +34,10 @@
         },
     ];
 
-    const links = [{ text: "Logs", href: "#" }];
+    const breadcrumbLinks = [{ text: "Diplomas", href: "/diplomas" }];
 </script>
 
-<MainContent class="flex flex-col ">
+<MainContent {breadcrumbLinks} class="flex flex-col ">
     <h1 class="text-hero">Diplomas</h1>
 
     <p class="text-lg my-4">

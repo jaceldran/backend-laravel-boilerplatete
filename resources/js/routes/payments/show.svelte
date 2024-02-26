@@ -9,7 +9,7 @@
 
     delete data.data;
 
-    const links = [
+    const breadcrumbLinks = [
         { text: "Payments", href: "/payments" },
         { text: `${payment.reference} (${payment.source_type})`, href: "#" },
     ];
@@ -19,8 +19,7 @@
     };
 </script>
 
-<Main>
-    <Breadcrumb {links} />
-
+<Main {breadcrumbLinks}>
+    <h1 class="text-hero">Payment</h1>
     <ObjectRender {data} />
 </Main>

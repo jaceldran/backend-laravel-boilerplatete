@@ -5,7 +5,6 @@ namespace Modules\Shared\Workflows;
 use Libs\Dataplay\Workflow\Workflow;
 use Libs\Dataplay\Contracts\ReaderInterface;
 use Libs\Dataplay\Contracts\WriterInterface;
-use Libs\Dataplay\Workflow\WorkflowException;
 use Libs\Dataplay\Contracts\WithUpsertInterface;
 use Libs\Dataplay\Contracts\TransformerInterface;
 use Libs\Dataplay\Contracts\ReaderWithTransformerInterface;
@@ -13,85 +12,102 @@ use Libs\Dataplay\Contracts\WriterWithTransformerInterface;
 
 class EtlWorkflow extends Workflow
 {
-    public function setTargetModel(WithUpsertInterface $targetModel): static
+    private const READING = 'reading';
+    private const WRITING = 'writing';
+
+    private $targetModel;
+    private $reader;
+    private $writer;
+
+
+    public function setTargetModel(string|WithUpsertInterface $targetModel): static
     {
-        return $this->set('targetModel', $targetModel);
+        $this->targetModel = is_string($targetModel)
+            ? resolve($targetModel)
+            : $targetModel;
+
+        return $this;
     }
 
-    public function setReader(
-        ReaderInterface|ReaderWithTransformerInterface $reader,
-        ?TransformerInterface $transformer = null
+    public function setReader(string|ReaderInterface $reader): static
+    {
+        $this->reader = is_string($reader)
+            ? resolve($reader)
+            : $reader;
+
+        return $this;
+    }
+
+    public function setReaderWithTransformer(
+        string|ReaderWithTransformerInterface $reader,
+        string|TransformerInterface $transformer = null
     ): static
     {
-        if ($transformer) {
-            $reader = $reader->withTransformer($transformer);
-        }
+        $this->setReader($reader);
 
-        return $this->set('reader', $reader);
+        $this->reader->withTransformer(
+            is_string($transformer)
+            ? resolve($transformer)
+            : $transformer
+        );
+
+        return $this;
     }
 
-    public function setWriter(
-        WriterInterface|WriterWithTransformerInterface $writer,
-        ?TransformerInterface $transformer = null
+    public function setWriter(string|WriterInterface $writer): static
+    {
+        $this->writer = is_string($writer)
+            ? resolve($writer)
+            : $writer;
+
+        return $this;
+    }
+
+    public function setWriterWithTransformer(
+        string|WriterWithTransformerInterface $writer,
+        string|TransformerInterface $transformer = null
     ): static
     {
-        if ($transformer) {
-            $writer = $writer->withTransformer($transformer);
-        }
+        $this->setWriter($writer);
 
-        return $this->set('writer', $writer);
+        $this->writer->withTransformer(
+            is_string($transformer)
+            ? resolve($transformer)
+            : $transformer
+        );
+
+        return $this;
     }
 
-    public function run()//: static
+    public function run(): void
     {
         $this
+            ->set('targetModel', $this->targetModel)
+            ->set('reader', $this->reader)
+            ->set('writer', $this->writer)
             ->addTask(
-                'Reading ' . class_basename($this->reader),
+                class_basename($this->reader) . ' ' . self::READING . '...',
                 function (Workflow $wf) {
-                    dump('Reading...');// $wf->context->info('Reading...');
+                    dump(class_basename($this->reader) . ' ' . self::READING . '...');
                     $wf->data = $wf->reader->data();
-
-                    // $wf->context->info(print_r($wf->data->all(), true));
-                    // die();
                 }
-            )
-            ->addTask(
-                'Writing ' . class_basename($this->writer),
+            )->addTask(
+                class_basename($this->writer) . ' ' . self::WRITING . '...',
                 function ($wf) {
-                    // $wf->context->info('Writing...');
-                    dump('Writing...');
+                    dump(class_basename($this->writer) . ' ' . self::WRITING . '...');
                     $wf->writer
                         ->setTargetModel($wf->targetModel)
                         ->setData($wf->data)
                         ->writeData();
                 }
-            )
-            ->after(
+            )->after(
                 '',
                 function (Workflow $wf) {
-                    dump('Finish');
+                    dump('Finish ' . $wf->name());
                     dump("Total read: " . $wf->data->count());
-
-                    // $wf->context->info('Finish');
-                    // $q = $wf->targetModel->newQuery()->where('data', 'like', '%2024%');
-                    // $c = $q->count();
-        
-                    // $wf->logInfo(
-                    //     ''
-                    //     // " - ($c) " . $q->toRawSql()
-                    //     // . '- Total read: ' .
-                    //     //. ' - Total changes: ' . $wf->targetModel->where('has_changes', true)->count()
-                    // );
                 }
-            )
-            ->setErrorHandler(
-                fn(WorkflowException $exception, Workflow $wf) => $wf->logError(
-                    $exception->getMessage()
-                    . ' - file: ' . $exception->getFile()
-                    . ' line: ' . $exception->getLine()
-                )
             );
 
-        return parent::run();
+        parent::run();
     }
 }

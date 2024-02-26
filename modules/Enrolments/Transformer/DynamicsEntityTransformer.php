@@ -12,8 +12,8 @@ class DynamicsEntityTransformer implements TransformerInterface
     public function handle(array|object $element): array|object
     {
         return [
-            'entity_name' => 'contact',
             'entity_id' => $element['id'],
+            'entity_name' => $element['entity_name'], // asignado en el reader
             'data' => json_encode($element),
             'alias' => null,
         ];

@@ -5,23 +5,23 @@
     import { createEventDispatcher } from "svelte";
 
     const dispatch = createEventDispatcher();
-    export let query = "";
+    export let q = "";
     export let url;
 
     const submit = (event) => {
-        dispatch("search", { query });
+        dispatch("search", { q });
     };
 
     let timer;
     const debounce = (event) => {
         clearTimeout(timer);
         timer = setTimeout(() => {
-            if (query.length === 0) {
+            if (q.length === 0) {
                 // dispatch("reset");
                 reset();
             }
 
-            if (query.length >= 3) {
+            if (q.length >= 3) {
                 // dispatch("search", { query });
                 search();
             }
@@ -29,7 +29,7 @@
     };
 
     const search = (event) => {
-        router.get(url, { q: query });
+        router.get(url, { q });
     };
 
     const reset = () => {
@@ -43,9 +43,8 @@
 >
     <input
         type="search"
-        name="query"
         class="h-10 outline-none px-4 bg-transparent"
-        bind:value={query}
+        bind:value={q}
         on:input={debounce}
     />
     <button type="submit" class="px-3 h-10">

@@ -11,15 +11,18 @@ use Modules\Enrolments\Transformer\DynamicsEntityTransformer;
 
 class DynamicsEntityWorkflow extends EtlWorkflow
 {
+    /**
+     * Obtiene las entidades dynamics relacionadas con los enrolments
+     * y las guarda en service.dynamics_entity.
+     */
     public static function start(Command $context): void
     {
         EtlWorkflow::new(class_basename(__CLASS__))
-            ->setTargetModel(DynamicsEntity::new())
-            ->setReader(DynamicsEntityReader::new())
-            ->setWriter(
-                PdoWriterWithTransformer::new(),
-                DynamicsEntityTransformer::new()
-            )
-            ->run();
+            ->setTargetModel(DynamicsEntity::class)
+            ->setReader(DynamicsEntityReader::class)
+            ->setWriterWithTransformer(
+                PdoWriterWithTransformer::class,
+                DynamicsEntityTransformer::class
+            )->run();
     }
 }

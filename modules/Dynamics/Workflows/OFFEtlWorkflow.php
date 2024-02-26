@@ -12,7 +12,7 @@ use Libs\Dataplay\Contracts\TransformerInterface;
 use Libs\Dataplay\Contracts\ReaderWithTransformerInterface;
 use Libs\Dataplay\Contracts\WriterWithTransformerInterface;
 
-class EtlWorkflow extends Workflow
+class OFFEtlWorkflow extends Workflow
 {
     public function setTargetModel(WithUpsertInterface $targetModel): static
     {

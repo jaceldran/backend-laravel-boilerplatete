@@ -6,25 +6,24 @@
     export let links;
 </script>
 
-<nav class="flex justify-between items-center h-10 my-2 {$$props.class}">
+<nav
+    class="flex justify-between items-center bg-neon-50 border-b px-2 py-1 mt-1 {$$props.class}"
+>
     <section class="flex tracking-tighter">
         <a use:inertia href="/">
             <Icon icon={faHome} class="dark:text-neon-light-dark" />
         </a>
-        {#each links as link}
-            <a use:inertia href={link.href} class="hover:underline">
+        {#each links as { text, href }}
+            <a use:inertia {href} class="hover:underline">
                 <Icon icon={faAnglesRight} size="sm" class="mx-1 " />
-                <span class="mt-.5 dark:text-neon-light-dark">{link.text}</span>
+                <span class="dark:text-neon-light-dark">{text}</span>
             </a>
         {/each}
-    </section>
-    <section>
-        <slot />
     </section>
 </nav>
 
 <style>
     a {
-        @apply flex items-center;
+        @apply flex items-center text-sm;
     }
 </style>

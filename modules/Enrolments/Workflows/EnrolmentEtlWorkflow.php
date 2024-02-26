@@ -11,16 +11,18 @@ use Libs\Dataplay\Writers\PdoWriterWithTransformer;
 
 class EnrolmentEtlWorkflow extends EtlWorkflow
 {
+    /**
+     * Traslada de la tabla etl.enrolments a service.enrolment_form
+     */
     public static function start(Command $context): void
     {
         EtlWorkflow::new(class_basename(__CLASS__))
-            ->setTargetModel(Enrolment::new())
-            ->setReader(EnrolmentEtlReader::new())
-            ->setWriter(
-                PdoWriterWithTransformer::new(),
-                EnrolmentEtlTransformer::new()
-            )
-            ->run();
+            ->setTargetModel(Enrolment::class)
+            ->setReader(EnrolmentEtlReader::class)
+            ->setWriterWithTransformer(
+                PdoWriterWithTransformer::class,
+                EnrolmentEtlTransformer::class
+            )->run();
     }
 
 }
