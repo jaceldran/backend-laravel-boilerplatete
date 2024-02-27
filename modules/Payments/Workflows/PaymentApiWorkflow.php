@@ -16,9 +16,9 @@ class PaymentApiWorkflow extends EtlWorkflow
         $tags = [];
 
         EtlWorkflow::new(class_basename(__CLASS__))
-            ->setTargetModel(EtlModel::new('Payments'))
+            ->setTargetModel(EtlModel::new('payments'))
             ->setReader(PaymentApiReader::new())
-            ->setWriter(
+            ->setWriterWithTransformer(
                 PdoWriterWithTransformer::new(),
                 PaymentApiTransformer::new()->setTags($tags)
             )

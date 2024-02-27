@@ -19,7 +19,7 @@ class SystemCommand extends AppEloquentModel implements WithUpsertInterface
     public function upsertUniqueColumns(): array
     {
         return [
-            'name',
+            'signature',
         ];
     }
 

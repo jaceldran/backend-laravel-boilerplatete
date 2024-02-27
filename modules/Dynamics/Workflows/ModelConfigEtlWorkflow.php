@@ -3,9 +3,10 @@
 namespace Modules\Dynamics\Workflows;
 
 
-use App\Models\SystemModel;
+
 use Illuminate\Console\Command;
 use Libs\Dataplay\Writers\PdoWriter;
+use Modules\System\Models\SystemModel;
 use Modules\Shared\Workflows\EtlWorkflow;
 use Modules\Dynamics\Readers\ModelConfigReader;
 use Modules\Dynamics\Transformers\ModelConfigTransformer;

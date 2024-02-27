@@ -10,18 +10,14 @@ return new class extends Migration {
     public function up(): void
     {
         Schema::create($this->table, function (Blueprint $table) {
-            $table->comment('Configuraciones de comandos del sistema');
             $table->uuid('id')->primary();
-            $table->string('name')->index();
+            $table->string('command');
+            $table->string('subcommand')->unique();
             $table->string('description')->index();
-            $table->string('signature')->index();
-            $table->string('tags')->nullable()->index();
             $table->json('last_run_data')->nullable();
             $table->timestamp('last_run')->nullable();
             $table->timestamp('created_at')->useCurrent();
             $table->timestamp('updated_at')->useCurrent();
-
-            $table->unique(['type', 'name',]);
         });
 
     }

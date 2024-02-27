@@ -3,6 +3,7 @@
     import { formatDistanceToNow } from "date-fns";
     import { es } from "date-fns/locale";
     import ObjectRender from "@/components/ui/ObjectRender.svelte";
+    import SearchInput from "@/components/ui/SearchInput.svelte";
     import ToolBar from "@/components/ui/ToolBar.svelte";
     import Navigation from "@/components/ui/Navigation.svelte";
     import Main from "@/layouts/App.svelte";
@@ -48,31 +49,31 @@
     <ToolBar class="justify-between">
         <Navigation class="horizontal subnav" {routes} />
         <section class="flex gap-2">
-            <!-- <button class="rounded-full bg-neon-100 px-4">
+            <button class="rounded-full bg-neon-100 px-4">
                 <Icon icon={faRefresh} class="" />
             </button>
-            <SearchInput url="/system-models" {q} /> -->
+            <SearchInput url="/system/commands" {q} />
         </section>
     </ToolBar>
     <!-- <h1 class="text-hero">Commands</h1> -->
 
-    <div class="grid grid-cols-2 gap-4">
+    <div class="grid grid-cols-1 gap-4">
         {#each Object.entries(commands) as [key, value]}
             <div class="shadow-md rounded-md">
                 <div class="command-name">{key}</div>
                 <ul class="">
-                    {#each Object.entries(value.list) as [k, v]}
+                    {#each value as { subcommand, description }}
                         <li class="command">
                             <section
                                 class="flex justify-between items-center bg-neon-50"
                             >
-                                <div class="signature">
-                                    {k}
+                                <div class="subcommand">
+                                    {subcommand}
                                 </div>
                                 <p class="buttons">
                                     <button
-                                        on:click={runCommand(k)}
-                                        data-command={k}
+                                        on:click={runCommand(subcommand)}
+                                        data-command={subcommand}
                                     >
                                         <Icon
                                             icon={faCircleRight}
@@ -83,7 +84,7 @@
                                     <a
                                         class="button"
                                         use:inertia
-                                        href="/system/commands/{k}"
+                                        href="/system/commands/{subcommand}"
                                         target="_blank"
                                     >
                                         <Icon
@@ -95,7 +96,7 @@
                                 </p>
                             </section>
 
-                            <div class="description">{@html v.description}</div>
+                            <div class="description">{@html description}</div>
                         </li>
                     {/each}
                 </ul>
@@ -115,7 +116,7 @@
     .command-name {
         @apply font-semibold  text-lg py-2 px-4 bg-neon-100 rounded-t-md;
     }
-    .signature {
+    .subcommand {
         @apply font-medium px-4 py-2;
     }
     .description {

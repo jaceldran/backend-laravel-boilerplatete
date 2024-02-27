@@ -9,7 +9,7 @@
 <nav
     class="flex justify-between items-center bg-neon-50 border-b px-2 py-1 mt-1 {$$props.class}"
 >
-    <section class="flex tracking-tighter">
+    <section class="flex tracking-tight">
         <a use:inertia href="/">
             <Icon icon={faHome} class="dark:text-neon-light-dark" />
         </a>

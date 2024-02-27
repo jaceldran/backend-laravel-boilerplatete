@@ -2,18 +2,25 @@
 
 namespace Modules\System\Controllers;
 
+use Illuminate\Database\Eloquent\Collection;
 use Inertia\Inertia;
 use Modules\Shared\Controllers\Controller;
+use Modules\System\Models\SystemCommand;
 
 class SystemCommandController extends Controller
 {
     public function index()
     {
-        $commands = $this->commands();
+        $query = SystemCommand::query()
+            ->whereNot('subcommand', 'like', '%all%')
+            ->orderBy('command')
+            ->orderBy('subcommand');
 
         if ($search = request('q', null)) {
-            //     $models->searchInColumns($search, ['type', 'name', 'data']);
+            $query->searchInColumns($search, ['command', 'subcommand', 'description']);
         }
+
+        $commands = $query->get()->groupBy('command');
 
         $data = [
             'commands' => $commands,
@@ -21,28 +28,6 @@ class SystemCommandController extends Controller
         ];
 
         return Inertia::render('system/commands/index', $data);
-    }
-
-    private function commands(): array
-    {
-        $commands['dynamics:etl']['list']['dynamics:etl model-configs'] = [
-            'description' => 'Conecta con Dynamics y actualiza las configuraciones de los modelos especificados en <kbd>config/dynamics.php</kbd>.',
-        ];
-
-        $commands['enrolment:etl']['list']['enrolment:etl api'] = [
-            'description' => 'Conecta con la api de <kbd>service.enae.es</kbd> y actualiza la tabla <kbd>etl.enrolments</kbd>.',
-        ];
-
-        $commands['enrolment:etl']['list']['enrolment:etl etl'] = [
-            'description' => 'Traslada los datos de <kbd>etl.enrolments</kbd> a <kbd>service.enrolment_form</kbd>.',
-        ];
-
-        $commands['enrolment:etl']['list']['enrolment:etl dyn'] = [
-            'description' => 'Actualiza la tabla <kbd>service.dynamics_entity</kbd> leyendo de Dynamics las entidades vinculadas a los enrolments de <kbd>service.enrolment_form</kbd>.',
-        ];
-
-
-        return $commands;
     }
 
     public function show(string $systemCommand)

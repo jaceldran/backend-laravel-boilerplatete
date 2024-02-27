@@ -11,14 +11,14 @@ use Libs\Dataplay\Writers\PdoWriterWithTransformer;
 
 class PaymentEtlWorkflow extends EtlWorkflow
 {
-    public static function start(): void
+    public static function start(Command $context): void
     {
         EtlWorkflow::new(class_basename(__CLASS__))
-            ->setTargetModel(Payment::new())
-            ->setReader(PaymentEtlReader::new())
-            ->setWriter(
-                PdoWriterWithTransformer::new(),
-                PaymentEtlTransformer::new()
+            ->setTargetModel(Payment::class)
+            ->setReader(PaymentEtlReader::class)
+            ->setWriterWithTransformer(
+                PdoWriterWithTransformer::class,
+                PaymentEtlTransformer::class
             )
             ->run();
     }

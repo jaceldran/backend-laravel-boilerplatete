@@ -53,21 +53,30 @@
         @apply flex-col;
     }
     nav a {
-        @apply flex justify-center items-center rounded-full py-2 px-4;
+        @apply flex justify-center items-center py-2 px-4;
     }
     nav a:hover {
         @apply text-neon-300;
     }
+    nav.main a {
+        @apply rounded-full;
+    }
     nav.main a.active {
         @apply bg-neon-500 text-white;
     }
+    /* nav.subnav a,
+    nav.subnav button {
+        padding-left: 0 !important;
+        padding-right: 0 !important;
+    } */
     nav.subnav a.active,
     nav.subnav button.active {
-        @apply underline;
+        @apply underline underline-offset-4;
+        text-decoration-thickness: 4px;
     }
     nav.subnav a,
     nav.subnav button {
-        @apply px-2 tracking-tight font-bold;
+        @apply px-2 font-bold;
         font-variant: small-caps;
         text-transform: lowercase;
     }
