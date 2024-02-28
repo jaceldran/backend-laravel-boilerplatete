@@ -34,7 +34,8 @@ Route::middleware('auth:sanctum')->group(function () {
         Route::get('/', SystemController::class);
         Route::resource('/models', SystemModelController::class);
         Route::get('/commands', [SystemCommandController::class, 'index']);
-        Route::get('/commands/{signature}', [SystemCommandController::class, 'show']);
+        Route::get('/commands/{command_id}/run', [SystemCommandController::class, 'run']);
+        Route::get('/commands/{command_id}', [SystemCommandController::class, 'show']);
     });
 
     Route::prefix('/dashboards')->group(function () {

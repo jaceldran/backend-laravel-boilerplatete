@@ -35,8 +35,10 @@
         },
     ];
 
-    const runCommand = (command) => {
-        confirm(`Ejecutar el comando "${command}"`);
+    const runCommand = (commandName, commandId) => {
+        if (confirm(`Ejecutar el comando "${commandName}"`)) {
+            router.get(`/system/commands/${commandId}/run`);
+        }
     };
     const breadcrumbLinks = [
         { text: "System", href: "/system" },
@@ -72,7 +74,7 @@
                                 </div>
                                 <p class="buttons">
                                     <button
-                                        on:click={runCommand(id)}
+                                        on:click={runCommand(subcommand, id)}
                                         data-command={id}
                                     >
                                         <Icon
@@ -81,7 +83,7 @@
                                             text="Run"
                                         />
                                     </button>
-                                    <a
+                                    <!-- <a
                                         class="button"
                                         use:inertia
                                         href="/system/commands/{subcommand}"
@@ -92,7 +94,7 @@
                                             size="lg"
                                             text="Log"
                                         />
-                                    </a>
+                                    </a> -->
                                 </p>
                             </section>
 
