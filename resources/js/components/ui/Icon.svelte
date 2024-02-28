@@ -1,6 +1,6 @@
 <script>
     import Fa from "svelte-fa";
-    import { config, dom, library } from "@fortawesome/fontawesome-svg-core";
+    // import { config, dom, library } from "@fortawesome/fontawesome-svg-core";
 
     export let icon;
     export let size;
@@ -8,8 +8,8 @@
     export let hover;
     export let text;
 
-    color = color || "text-neutral-400 ";
-    hover = hover || "hover:text-neutral-500 dark:hover:text-neon-700";
+    color = color || "text-neutral-500 ";
+    hover = hover || "hover:text-neutral-600 dark:hover:text-neon-700";
 
     // Configurar FontAwesome
     // config.autoReplaceSvg = "nest";
@@ -21,7 +21,11 @@
     // dom.watch();
 </script>
 
-<div class="{color} {hover}{$$props.class} flex {text ? 'gap-2' : ''}">
+<div
+    class="{color} {hover}{$$props.class} flex items-center {text
+        ? 'gap-1'
+        : ''}"
+>
     <span>{text || ""}</span>
     <Fa {icon} {size} class={$$props.class} />
 </div>

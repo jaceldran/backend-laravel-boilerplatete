@@ -7,7 +7,7 @@
 </script>
 
 <nav
-    class="flex justify-between items-center bg-neon-50 border-b px-2 py-1 mt-1 {$$props.class}"
+    class="flex justify-between items-center brand-lighter dark:brand-darker border-b px-2 py-2 mt-0 shadow {$$props.class}"
 >
     <section class="flex tracking-tight">
         <a use:inertia href="/">

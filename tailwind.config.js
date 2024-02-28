@@ -1,6 +1,6 @@
 /** @type {import('tailwindcss').Config} */
 
-const neonSet = {
+const colorSet = {
   "neon-50": "#EFEBF4",
   "neon-100": "#DFD8E8",
   "neon-150": "#CFC4DD",
@@ -17,6 +17,7 @@ const neonSet = {
   "neon-950": "#241b2f",
 };
 
+
 export default {
   darkMode: "class",
   content: [
@@ -29,10 +30,10 @@ export default {
       screens: {
 
       },
-      textColor: neonSet,
-      borderColor: neonSet,
-      backgroundColor: neonSet,
-      gradientColorStops: neonSet,
+      textColor: colorSet,
+      borderColor: colorSet,
+      backgroundColor: colorSet,
+      gradientColorStops: colorSet,
       fontFamily: {
         sans: [
           'Inter',

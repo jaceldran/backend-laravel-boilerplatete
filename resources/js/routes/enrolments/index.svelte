@@ -80,7 +80,7 @@
     <ToolBar class="justify-between">
         <Navigation class="horizontal subnav" {routes} />
         <section class="flex gap-2">
-            <button class="rounded-full bg-neon-100 px-4">
+            <button class="px-4">
                 <Icon icon={faRefresh} class="" />
             </button>
             <SearchInput url="/enrolments" {q} />

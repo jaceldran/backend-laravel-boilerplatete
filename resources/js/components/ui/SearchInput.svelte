@@ -38,7 +38,7 @@
 </script>
 
 <form
-    class="flex bg-neon-100 hover:bg-neon-150 dark:bg-neon-900 dark:text-green-300 rounded-full"
+    class="flex brand-light hover:brand-normal dark:brand-dark rounded-full"
     on:submit|preventDefault={submit}
 >
     <input

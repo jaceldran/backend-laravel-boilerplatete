@@ -1,3 +1,3 @@
-<tbody class="border-inherit {$$props.class}">
+<tbody class={$$props.class}>
     <slot />
 </tbody>

@@ -29,14 +29,14 @@
     const routes = [
         { text: "Enrolment", value: "enrolment" },
         {
-            text: "Comparar contact",
+            text: "Contact",
             value: "contact",
         },
         {
-            text: "Comparar opportunity",
+            text: "Opportunity",
             value: "opportunity",
         },
-        { text: "Ver lead", value: "lead" },
+        { text: "Lead", value: "lead" },
     ];
 </script>
 

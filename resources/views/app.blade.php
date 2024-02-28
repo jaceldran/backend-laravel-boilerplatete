@@ -10,8 +10,8 @@
 </head>
 
 <body class="antialiased
-    dark:bg-neon-950 dark:text-neon-150
-    bg-neutral-50 text-neutral-600 text-normal
+    dark:brand-darkest
+    brand-lightest text-normal
     ">
     @inertia
 </body>

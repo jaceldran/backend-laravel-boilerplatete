@@ -1,8 +1,10 @@
 @import url('https://fonts.googleapis.com/css2?family=Inter:wght@100;200;300;400;500;600;700;800&display=swap');
 
-@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700;800;900&display=swap');
+/* @import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700;800;900&display=swap');
 
-@import url('https://fonts.googleapis.com/css2?family=Overpass:wght@100;200;300;400;500;600;700;800;900&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Overpass:wght@100;200;300;400;500;600;700;800;900&display=swap'); */
+
+@import './theme.css';
 
 @tailwind base;
 @tailwind components;
@@ -20,11 +22,7 @@ h2 {
     @apply w-1 whitespace-nowrap;
 }
 
-/* fakes */
-button.action {
-    @apply h-8 px-2 bg-neutral-700 hover:bg-neutral-600 text-white rounded text-sm;
-}
 
 
-/* @import './form.css'; */
+
 /* @import './table.css'; */

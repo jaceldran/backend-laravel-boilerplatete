@@ -4,6 +4,8 @@
 
     export let routes;
     export let buttonValue;
+    // export let linkDefault;
+    // export let linkActive;
 
     const dispatch = createEventDispatcher();
 
@@ -55,19 +57,14 @@
     nav a {
         @apply flex justify-center items-center py-2 px-4;
     }
-    nav a:hover {
+    /* nav a:hover {
         @apply text-neon-300;
-    }
+    } */
     nav.main a {
         @apply rounded-full;
     }
-    nav.main a.active {
-        @apply bg-neon-500 text-white;
-    }
-    /* nav.subnav a,
-    nav.subnav button {
-        padding-left: 0 !important;
-        padding-right: 0 !important;
+    /* nav.main a.active {
+        @apply bg-black text-white;
     } */
     nav.subnav a.active,
     nav.subnav button.active {
@@ -76,7 +73,7 @@
     }
     nav.subnav a,
     nav.subnav button {
-        @apply px-2 font-bold;
+        @apply px-2 font-semibold;
         font-variant: small-caps;
         text-transform: lowercase;
     }

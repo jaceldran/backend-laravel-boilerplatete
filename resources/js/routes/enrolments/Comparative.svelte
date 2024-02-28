@@ -54,22 +54,23 @@
             <TableTh>Atributo</TableTh>
             <TableTh>Formulario</TableTh>
             <TableTh class="flex items-center">
+                <Icon class="px-2" size="md" icon={faRefresh} />
                 <span>
                     Dynamics, hace {formatDistanceToNow(dynamics_updated_at, {
                         locale: es,
                     })}</span
                 >
-                <Icon
-                    class="rounded border px-2 text-lg cursor-pointer"
-                    icon={faRefresh}
-                />
             </TableTh>
         </TableRow>
     </TableHeader>
     <TableBody>
         {#each keys as key}
             {#if enrolment_data[key] || dynamics_data[key]}
-                <TableRow class={equals(key) ? "bg-green-50" : "bg-red-50"}>
+                <TableRow
+                    class={equals(key)
+                        ? "bg-green-50 dark:bg-neutral-700 dark:border-neutral-600 dark:text-emerald-500"
+                        : "bg-red-50 dark:bg-neutral-700 dark:border-neutral-600 dark:text-pink-500"}
+                >
                     <TableTd
                         class="font-medium {key === key.toLowerCase()
                             ? ''

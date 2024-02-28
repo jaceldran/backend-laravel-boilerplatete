@@ -10,7 +10,7 @@
     import Icon from "@/components/ui/Icon.svelte";
     import {
         faArrowRight,
-        faCircleRight,
+        faCirclePlay,
         faEye,
         faRefresh,
     } from "@fortawesome/free-solid-svg-icons";
@@ -48,37 +48,37 @@
 <Main {breadcrumbLinks}>
     <ToolBar class="justify-between">
         <Navigation class="horizontal subnav" {routes} />
-        <section class="flex gap-2">
-            <button class="rounded-full bg-neon-100 px-4">
+        <!-- <section class="flex gap-2"> -->
+        <!-- <button class="rounded-full bg-neon-100 px-4">
                 <Icon icon={faRefresh} class="" />
-            </button>
-            <SearchInput url="/system/commands" {q} />
-        </section>
+            </button> -->
+        <SearchInput url="/system/commands" {q} />
+        <!-- </section> -->
     </ToolBar>
     <!-- <h1 class="text-hero">Commands</h1> -->
 
     <div class="grid grid-cols-1 gap-4">
         {#each Object.entries(commands) as [key, value]}
             <div class="shadow-md rounded-md">
-                <div class="command-name">{key}</div>
+                <div class="command-name brand-normal dark:brand-darker">
+                    {key}
+                </div>
                 <ul class="">
-                    {#each value as { subcommand, description }}
+                    {#each value as { id, subcommand, description }}
                         <li class="command">
-                            <section
-                                class="flex justify-between items-center bg-neon-50"
-                            >
-                                <div class="subcommand">
+                            <section class="flex justify-between items-center">
+                                <div class="subcommand dark:text-green-200">
                                     {subcommand}
                                 </div>
                                 <p class="buttons">
                                     <button
-                                        on:click={runCommand(subcommand)}
-                                        data-command={subcommand}
+                                        on:click={runCommand(id)}
+                                        data-command={id}
                                     >
                                         <Icon
-                                            icon={faCircleRight}
+                                            icon={faCirclePlay}
                                             size="lg"
-                                            text="Ejecutar"
+                                            text="Run"
                                         />
                                     </button>
                                     <a
@@ -90,13 +90,15 @@
                                         <Icon
                                             icon={faEye}
                                             size="lg"
-                                            text="Ver log"
+                                            text="Log"
                                         />
                                     </a>
                                 </p>
                             </section>
 
-                            <div class="description">{@html description}</div>
+                            <div class="description">
+                                {@html description}
+                            </div>
                         </li>
                     {/each}
                 </ul>
@@ -114,10 +116,10 @@
 
 <style>
     .command-name {
-        @apply font-semibold  text-lg py-2 px-4 bg-neon-100 rounded-t-md;
+        @apply font-semibold  text-lg py-2 px-4 rounded-t-md;
     }
     .subcommand {
-        @apply font-medium px-4 py-2;
+        @apply font-medium h-10 px-4 py-2;
     }
     .description {
         @apply px-4 py-2;
@@ -127,10 +129,11 @@
     }
     .buttons button,
     .buttons .button {
-        @apply flex gap-4 items-center shadow rounded-full py-1 px-3 bg-white uppercase text-xs font-semibold;
+        @apply cursor-pointer flex items-center shadow rounded-full py-1 px-2 bg-white uppercase text-[75%] font-semibold;
+        /* font-variant: small-caps; */
     }
-    button:hover,
+    /* button:hover,
     .button:hover {
-        @apply bg-neon-100;
-    }
+        @apply bg-neon-100 text-red-500;
+    } */
 </style>

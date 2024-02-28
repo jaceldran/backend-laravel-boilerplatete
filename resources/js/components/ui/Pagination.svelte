@@ -5,7 +5,7 @@
     export let data;
 </script>
 
-<nav class="w-full dark:bg-neon-900 bg-neon-50">
+<nav class="pagination">
     <section class="showing">
         Mostrando {data.from} a {data.to} de {data.total}
     </section>
@@ -22,7 +22,7 @@
                         <a
                             use:inertia
                             class="whitespace-nowrap {link.active
-                                ? 'dark:bg-neon-700 bg-neon-150'
+                                ? 'active'
                                 : ''}"
                             href={link.url}>{@html link.label}</a
                         >

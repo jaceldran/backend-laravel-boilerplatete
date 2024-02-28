@@ -8,11 +8,6 @@
     };
 </script>
 
-<tr
-    on:click={handleClick}
-    class="border-inherit border-b
-    hover:bg-neon-50
-    dark:hover:bg-neon-900 {$$props.class || ''}"
->
+<tr on:click={handleClick} class="border-inherit border-b {$$props.class}">
     <slot />
 </tr>
