@@ -11,21 +11,21 @@
     const routes = [
         { text: "Modelos", href: "/system/models", active: true },
         {
-            text: "Rutas",
-            target: "_blank",
-            href: "/request-docs",
-            active: false,
-        },
-        {
             text: "Comandos",
             target: "_self",
             href: "/system/commands",
             active: false,
         },
+        {
+            text: "Rutas",
+            target: "_blank",
+            href: "/request-docs",
+            active: false,
+        },
     ];
 
     const breadcrumbLinks = [
-        { text: "System", href: "/system" },
+        { text: "Sistema", href: "/system" },
         { text: "Models", href: "/system/models" },
         { text: `${model.type}`, href: "#" },
         { text: `${model.name}`, href: "#" },

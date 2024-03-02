@@ -4,6 +4,6 @@
     height = height || "h-10";
 </script>
 
-<section class="flex items-center {height} my-2 {$$props.class}">
+<section class="flex items-center {height} my-4 {$$props.class}">
     <slot />
 </section>

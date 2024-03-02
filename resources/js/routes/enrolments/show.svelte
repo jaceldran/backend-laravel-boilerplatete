@@ -16,8 +16,20 @@
 
     delete enrolment_data.data;
 
+    dynamics_contact = dynamics_contact || {
+        error: "No se ha encontrado el contacto Dynamics",
+    };
+
+    dynamics_opportunity = dynamics_opportunity || {
+        error: "No se ha encontrado la oportunidad Dynamics",
+    };
+
+    dynamics_lead = dynamics_lead || {
+        error: "No se ha encontrado el lead Dynamics",
+    };
+
     const breadcrumbLinks = [
-        { text: "Enrolments", href: "/enrolments" },
+        { text: "Preinscripciones", href: "/enrolments" },
         { text: `${enrolment.contact_email}`, href: "#" },
     ];
 
@@ -57,14 +69,18 @@
     {/if}
 
     {#if tab === "lead"}
-        <ObjectRender data={dynamics_lead.data} />
+        {#if dynamics_lead.error}
+            <div class="p-4 rounded-lg border">
+                {dynamics_lead.error}
+            </div>
+        {:else}
+            <ObjectRender data={dynamics_lead.data} />
+        {/if}
     {/if}
 
     {#if tab === "contact"}
         {#if dynamics_contact.error}
-            <div
-                class=" border-red-700 border-2 font-medium text-red-700 p-4 text-xl"
-            >
+            <div class="p-4 rounded-lg border">
                 {dynamics_contact.error}
             </div>
         {:else}
@@ -77,9 +93,7 @@
 
     {#if tab === "opportunity"}
         {#if dynamics_opportunity.error}
-            <div
-                class=" border-red-700 border-2 font-medium text-red-700 p-4 text-xl"
-            >
+            <div class="p-4 rounded-lg border">
                 {dynamics_opportunity.error}
             </div>
         {:else}
@@ -90,12 +104,3 @@
         {/if}
     {/if}
 </Main>
-
-<style>
-    button {
-        @apply py-0 px-3 shadow border-neon-100 rounded-full text-sm;
-    }
-    button.active {
-        @apply bg-neon-500 text-white;
-    }
-</style>

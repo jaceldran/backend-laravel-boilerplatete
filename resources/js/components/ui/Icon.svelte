@@ -8,8 +8,8 @@
     export let hover;
     export let text;
 
-    color = color || "text-neutral-500 ";
-    hover = hover || "hover:text-neutral-600 dark:hover:text-neon-700";
+    // color = color || "text-normal";
+    // hover = hover || "hover:text-dark";
 
     // Configurar FontAwesome
     // config.autoReplaceSvg = "nest";
@@ -22,7 +22,7 @@
 </script>
 
 <div
-    class="{color} {hover}{$$props.class} flex items-center {text
+    class="{color} {hover} {$$props.class} flex items-center {text
         ? 'gap-1'
         : ''}"
 >

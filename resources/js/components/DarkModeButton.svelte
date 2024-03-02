@@ -1,6 +1,8 @@
 <script>
     import { colorScheme } from "@/stores/colorScheme.js";
-    import IconBadge from "@/components/ui/IconBadge.svelte";
+    import Icon from "@/components/ui/Icon.svelte";
+    // import Fa from "svelte-fa";
+    // import IconBadge from "@/components/ui/IconBadge.svelte";
     import { faMoon, faSun } from "@fortawesome/free-solid-svg-icons";
 
     function toggle() {
@@ -8,12 +10,16 @@
     }
 </script>
 
-<button class={$$props.class} on:click={toggle}>
+<button on:click={toggle} class="rounded-full px-1">
     {#if $colorScheme === "light"}
-        <IconBadge icon={faMoon} class="bg-transparent {$$props.class}" />
+        <Icon icon={faMoon} size="lg" class={$$props.class} />
     {/if}
 
     {#if $colorScheme === "dark"}
-        <IconBadge icon={faSun} class="dark:bg-transparent" />
+        <Icon
+            icon={faSun}
+            size="lg"
+            class="dark:bg-transparent {$$props.class}"
+        />
     {/if}
 </button>

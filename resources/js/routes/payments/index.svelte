@@ -48,15 +48,15 @@
         return color;
     };
 
-    const breadcrumbLinks = [{ text: "Payments", href: "/payments" }];
-    const routes = [{ text: "Payments", href: "/payments", active: true }];
+    const breadcrumbLinks = [{ text: "Pagos", href: "/payments" }];
+    const routes = [{ text: "Pagos", href: "/payments", active: true }];
 </script>
 
 <MainContent {breadcrumbLinks}>
     <ToolBar class="justify-between">
         <Navigation class="horizontal subnav" {routes} />
         <section class="flex gap-2">
-            <button class="px-4">
+            <button>
                 <Icon icon={faRefresh} class="" />
             </button>
             <SearchInput url="/payments" {q} />
@@ -79,7 +79,7 @@
         <TableBody>
             {#each payments.data as { id, source_type, source_name, source_id, reference, method, amount, result, attempts, data, created_at }}
                 <TableRow class="border-b border-t">
-                    <TableTd class="created_at whitespace-nowrap">
+                    <TableTd class="created_at whitespace-nowrap pl-0">
                         <span
                             class="inline-block h-3 w-3 rounded-full {paymentStatusColor(
                                 source_type,
@@ -118,7 +118,7 @@
                     <TableTd class="text-right">
                         {numberFormat(amount, { currency: "EUR" })}
                     </TableTd>
-                    <TableTd class="actions align-middle p-0">
+                    <TableTd class="actions align-middle pr-0">
                         <a use:inertia href="/payments/{id}">
                             <Icon icon={faEye} size="lg" />
                         </a>

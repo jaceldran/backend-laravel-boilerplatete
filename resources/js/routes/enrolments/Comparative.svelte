@@ -1,7 +1,4 @@
 <script>
-    import Main from "@/layouts/App.svelte";
-    import Breadcrumb from "@/components/ui/Breadcrumb.svelte";
-    import ObjectRender from "@/components/ui/ObjectRender.svelte";
     import { jsonRender, dateFormat, isDate } from "@/utils";
     import TableContent from "@/components/ui/TableContent.svelte";
     import TableHeader from "@/components/ui/TableHeader.svelte";
@@ -12,7 +9,7 @@
     import { formatDistanceToNow } from "date-fns";
     import { es } from "date-fns/locale";
     import Icon from "@/components/ui/Icon.svelte";
-    import { faRefresh } from "@fortawesome/free-solid-svg-icons";
+    import { faC, faClose, faRefresh } from "@fortawesome/free-solid-svg-icons";
 
     export let enrolment_data;
     export let dynamics;
@@ -43,14 +40,10 @@
     };
 </script>
 
-<!-- <pre>
-    {jsonRender(enrolment_data)}
-    {jsonRender(dynamics_data)}
-</pre> -->
-
 <TableContent>
     <TableHeader>
         <TableRow class="text-left">
+            <TableTh></TableTh>
             <TableTh>Atributo</TableTh>
             <TableTh>Formulario</TableTh>
             <TableTh class="flex items-center">
@@ -66,17 +59,20 @@
     <TableBody>
         {#each keys as key}
             {#if enrolment_data[key] || dynamics_data[key]}
-                <TableRow
-                    class={equals(key)
-                        ? "bg-green-50 dark:bg-neutral-700 dark:border-neutral-600 dark:text-emerald-500"
-                        : "bg-red-50 dark:bg-neutral-700 dark:border-neutral-600 dark:text-pink-500"}
-                >
-                    <TableTd
-                        class="font-medium {key === key.toLowerCase()
-                            ? ''
-                            : 'text-red-500'}"
-                    >
-                        {key}
+                <TableRow>
+                    <TableTd class="wmin pl-0">
+                        {#if !equals(key) || key !== key.toLowerCase()}
+                            <Icon icon={faClose} color="text-red-700" />
+                        {/if}
+                    </TableTd>
+                    <TableTd>
+                        <span
+                            class="font-medium {key === key.toLowerCase()
+                                ? ''
+                                : 'text-red-700 underline'}"
+                        >
+                            {key}
+                        </span>
                     </TableTd>
                     <TableTd>{JSON.stringify(enrolment_data[key])}</TableTd>
                     <TableTd

@@ -8,6 +8,9 @@
     };
 </script>
 
-<tr on:click={handleClick} class="border-inherit border-b {$$props.class}">
+<tr
+    on:click={handleClick}
+    class="border-inherit border-b dark:border-dark {$$props.class}"
+>
     <slot />
 </tr>

@@ -38,19 +38,14 @@
 </script>
 
 <form
-    class="flex brand-light hover:brand-normal dark:brand-dark rounded-full"
+    class="search flex rounded-full translate-x-5"
     on:submit|preventDefault={submit}
 >
     <input
         type="search"
-        class="h-10 outline-none px-4 bg-transparent"
+        class="h-10 outline-none pl-4 pr-14 rounded-full bg-inherit"
         bind:value={q}
         on:input={debounce}
     />
-    <button type="submit" class="px-3 h-10">
-        <Icon
-            icon={faMagnifyingGlass}
-            class="text-neon-light-darker dark:text-neon-light-medium"
-        />
-    </button>
+    <Icon icon={faMagnifyingGlass} class="-translate-x-5" />
 </form>

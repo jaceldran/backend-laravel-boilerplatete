@@ -1,8 +1,10 @@
 <?php
 
+use App\Mail\Notification;
 use Inertia\Inertia;
 use Illuminate\Support\Facades\Route;
 
+use Modules\Pages\Controllers\HomeController;
 use Modules\Web\Controllers\LogController;
 use Modules\Auth\Controllers\AuthController;
 use Modules\System\Controllers\SystemController;
@@ -14,15 +16,34 @@ use Modules\Dashboard\Controllers\DashboardController;
 use Modules\Enrolments\Controllers\EnrolmentController;
 use Modules\System\Controllers\SystemCommandController;
 
+Route::get('/mail', function () {
+    // return (new Notification('Juan'))->render();
+    // return new Notification('Juan');
+
+    $response = Mail::mailer('smtp') // opcional
+        ->to('jaceldran@gmail.com')
+        // ->from('xxx@sss.com')
+        // ->cc('jaceldran@enae.es')
+        //->send(new Notification('juan'))
+        ->queue(new Notification('juan'))
+    ;
+
+    dump($response);
+});
+
+//------------------------------------------------------------
+
 Route::get('/login', [AuthController::class, 'form'])->name('login');
 Route::get('/logout', [AuthController::class, 'logout'])->name('auth.logout');
 Route::post('/login', [AuthController::class, 'login'])->name('auth.login');
 
-Route::get('/', function () {
-    return Inertia::render('Home');
-});
+// Route::get('/', function () {
+//     return Inertia::render('Home');
+// });
 
 Route::middleware('auth:sanctum')->group(function () {
+    Route::get('/', HomeController::class);
+
     Route::resource('/enrolments', EnrolmentController::class);
     Route::resource('/payments', PaymentController::class);
     Route::get('/diplomas', DiplomaController::class);

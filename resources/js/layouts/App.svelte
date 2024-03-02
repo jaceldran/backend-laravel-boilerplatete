@@ -15,7 +15,7 @@
 </script>
 
 <div class="layout {$colorScheme}">
-    <header class="bg-white dark:brand-darkest">
+    <header class="">
         <a
             use:inertia
             href="/"
@@ -23,12 +23,21 @@
         >
             <img src={Logo} alt="log" class="h-12" />
         </a>
-        <span class="flex items-center mr-4">
+        <span class="flex items-center mr-4 gap-4">
             <Navigation class="main horizontal" routes={mainNavigation} />
-            <DarkModeButton class="" />
-            <UserButton class="" {user} />
+
+            <div class="flex items-center gap-2">
+                <DarkModeButton
+                    class="text-normal dark:text-lighter dark:hover:text-white"
+                />
+                <UserButton
+                    {user}
+                    class="text-normal dark:text-lighter dark:hover:text-white"
+                />
+            </div>
         </span>
     </header>
+
     {#if breadcrumbLinks}
         <Breadcrumb links={breadcrumbLinks} />
     {/if}
@@ -46,7 +55,7 @@
         @apply flex flex-col h-svh;
     }
     header {
-        @apply flex justify-between items-center shadow-md w-full;
+        @apply flex justify-between items-center w-full;
     }
     main {
         @apply flex-1;

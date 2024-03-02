@@ -10,7 +10,7 @@
     delete data.data;
 
     const breadcrumbLinks = [
-        { text: "Payments", href: "/payments" },
+        { text: "Pagos", href: "/payments" },
         { text: `${payment.reference} (${payment.source_type})`, href: "#" },
     ];
 

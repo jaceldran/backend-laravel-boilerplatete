@@ -30,15 +30,15 @@
     const routes = [
         { text: "Modelos", href: "/system/models", active: true },
         {
-            text: "Rutas",
-            target: "_blank",
-            href: "/request-docs",
-            active: false,
-        },
-        {
             text: "Comandos",
             target: "_self",
             href: "/system/commands",
+            active: false,
+        },
+        {
+            text: "Rutas",
+            target: "_blank",
+            href: "/request-docs",
             active: false,
         },
     ];
@@ -52,7 +52,7 @@
         location.href = `/system/models/${id}`;
     };
     const breadcrumbLinks = [
-        { text: "System", href: "/system" },
+        { text: "Sistema", href: "/system" },
         { text: "Modelos", href: "/system/models" },
     ];
 </script>
@@ -61,7 +61,7 @@
     <ToolBar class="justify-between">
         <Navigation class="horizontal subnav" {routes} />
         <section class="flex gap-2">
-            <button class="px-4">
+            <button>
                 <Icon icon={faRefresh} class="" />
             </button>
             <SearchInput url="/system/models" {q} />
@@ -93,7 +93,7 @@
                             on:click={show(id)}
                             data-id={id}
                         >
-                            <Icon icon={faEye} class="lg" />
+                            <Icon icon={faEye} size="lg" />
                         </button>
                     </TableTd>
                 </TableRow>

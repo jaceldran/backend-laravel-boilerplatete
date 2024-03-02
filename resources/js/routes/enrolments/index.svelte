@@ -48,39 +48,39 @@
     };
 
     const enrolmentStatusColor = (sync, sync_at, sync_attempts) => {
-        let color = "bg-[silver] dark:bg-white";
+        let color = "bg-[silver]";
 
         if (sync) {
-            color = "bg-[lightblue] dark:bg-[deepskyblue]";
+            color = "bg-[lightblue]";
         }
 
         if (sync && sync_attempts > 1) {
-            color = "bg-[indianred] dark:bg-[red]";
+            color = "bg-[indianred]";
         }
 
         if (isDate(sync_at)) {
-            color = "bg-[lightgreen] dark:bg-[greenyellow]";
+            color = "bg-[lightgreen]";
         }
 
         return color;
     };
 
     const routes = [
-        { text: "Enrolments", href: "/enrolments", active: true },
+        { text: "Preinscripciones", href: "/enrolments", active: true },
         {
             text: "Notifications",
             href: "/enrolments/notifications",
             active: false,
         },
     ];
-    const breadcrumbLinks = [{ text: "Enrolments", href: "/enrolments" }];
+    const breadcrumbLinks = [{ text: "Preinscripciones", href: "/enrolments" }];
 </script>
 
 <Main {breadcrumbLinks}>
     <ToolBar class="justify-between">
         <Navigation class="horizontal subnav" {routes} />
         <section class="flex gap-2">
-            <button class="px-4">
+            <button>
                 <Icon icon={faRefresh} class="" />
             </button>
             <SearchInput url="/enrolments" {q} />
@@ -92,7 +92,7 @@
             <TableRow>
                 <TableTh>Entrada</TableTh>
                 <TableTh>Solicitante</TableTh>
-                <TableTh>Programa</TableTh>
+                <TableTh class="hidden lg:table-cell">Programa</TableTh>
                 <TableTh>Sincronización</TableTh>
                 <TableTh></TableTh>
             </TableRow>
@@ -101,7 +101,7 @@
         <TableBody>
             {#each enrolments.data as { id, created_at, contact_email, token, sync, requests, sync_at, sync_attempts, data }}
                 <TableRow>
-                    <TableTd class="created_at whitespace-nowrap">
+                    <TableTd class="created_at whitespace-nowrap pl-0">
                         <span
                             class="inline-block h-3 w-3 rounded-full {enrolmentStatusColor(
                                 sync,
@@ -132,7 +132,9 @@
                         <div class="text-sm">{contactName(data)}</div>
                     </TableTd>
 
-                    <TableTd class="product">{productName(data)}</TableTd>
+                    <TableTd class="hidden lg:table-cell"
+                        >{productName(data)}</TableTd
+                    >
 
                     <TableTd class="sync_at whitespace-nowrap">
                         <span
@@ -155,7 +157,7 @@
                         </div>
                     </TableTd>
 
-                    <TableTd class="actions flex justify-end items-center">
+                    <TableTd class="actions flex justify-end items-center pr-0">
                         <a
                             class="py-3 px-2"
                             use:inertia

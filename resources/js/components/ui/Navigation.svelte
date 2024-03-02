@@ -57,19 +57,8 @@
     nav a {
         @apply flex justify-center items-center py-2 px-4;
     }
-    /* nav a:hover {
-        @apply text-neon-300;
-    } */
     nav.main a {
         @apply rounded-full;
-    }
-    /* nav.main a.active {
-        @apply bg-black text-white;
-    } */
-    nav.subnav a.active,
-    nav.subnav button.active {
-        @apply underline underline-offset-4;
-        text-decoration-thickness: 4px;
     }
     nav.subnav a,
     nav.subnav button {

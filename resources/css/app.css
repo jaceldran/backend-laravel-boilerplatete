@@ -10,19 +10,30 @@
 @tailwind components;
 @tailwind utilities;
 
-h1.text-hero {
-    @apply my-4 text-6xl font-extrabold tracking-[-4px] border-b-4;
+header {
+    @apply bg-normal dark:bg-dark;
 }
 
-h2 {
-    @apply my-4 text-2xl font-semibold text-neon-400 ;
+nav.breadcrumb {
+    @apply bg-normal bg-opacity-60 dark:bg-dark dark:bg-opacity-80;
+}
+
+nav.main a {
+    @apply font-medium;
+}
+
+nav.main .active {
+    @apply bg-dark text-lightest dark:bg-darkest  /*bg-[#aa0a2e]*/;
+}
+
+nav.pagination {
+    @apply bg-light dark:bg-dark;
+}
+
+form.search input {
+    @apply bg-normal dark:bg-dark ;
 }
 
 .wmin {
     @apply w-1 whitespace-nowrap;
 }
-
-
-
-
-/* @import './table.css'; */

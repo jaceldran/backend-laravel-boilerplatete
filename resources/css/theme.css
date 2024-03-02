@@ -1,39 +1,19 @@
 @layer utilities {
-    /* navigations */
-    nav.main a.active {
-        @apply bg-neutral-500 text-white;
-    }
-    nav.subnav a, nav.subnav button {
-        @apply text-neutral-500;
-    }
-
-    /* table.content tr:hover {
-        @apply bg-neutral-100;
-    } */
-
-    /* combis */
-    .brand-lightest {
-       @apply bg-neutral-50 border-neutral-100 text-neutral-700;
-    }
-    .brand-lighter {
-       @apply bg-neutral-100 border-neutral-200;
-    }
-    .brand-light {
-       @apply bg-neutral-200 border-neutral-300;
-    }
-    .brand-normal {
-       @apply bg-neutral-300 border-neutral-400;
-    }
-    .brand-accent {
-       @apply bg-neutral-500 border-neutral-400 text-white;
-    }
-    .brand-dark {
-       @apply bg-neutral-600 border-neutral-500 text-white;
-    }
-    .brand-darker {
-       @apply bg-neutral-700 border-neutral-600 text-white;
-    }
-    .brand-darkest {
-       @apply bg-neutral-800 border-neutral-700 text-white;
-    }
+   .text-hero {
+      @apply my-4 text-6xl font-extrabold tracking-[-4px] underline underline-offset-4 decoration-8 decoration-amber-400
+      /*decoration-[#aa0a2e]*/
+      ;
    }
+
+   .underlined-4,
+   nav.subnav a.active,
+   nav.subnav button.active {
+      @apply underline underline-offset-8 decoration-4 decoration-amber-400
+      /*decoration-[#aa0a2e]*/
+      ;
+   }
+
+   /* tr:nth-child(even) {
+      @apply bg-light;
+   } */
+}
