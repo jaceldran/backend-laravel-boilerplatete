@@ -1,18 +1,19 @@
 <?php
 
-use App\Mail\Notification;
 use Inertia\Inertia;
+use App\Mail\Notification;
 use Illuminate\Support\Facades\Route;
 
-use Modules\Pages\Controllers\HomeController;
 use Modules\Web\Controllers\LogController;
 use Modules\Auth\Controllers\AuthController;
+use Modules\Pages\Controllers\HomeController;
 use Modules\System\Controllers\SystemController;
 
 use Modules\Diplomas\Controllers\DiplomaController;
 use Modules\Payments\Controllers\PaymentController;
 use Modules\System\Controllers\SystemModelController;
 use Modules\Dashboard\Controllers\DashboardController;
+use Modules\System\Controllers\SystemConfigController;
 use Modules\Enrolments\Controllers\EnrolmentController;
 use Modules\System\Controllers\SystemCommandController;
 
@@ -37,9 +38,6 @@ Route::get('/login', [AuthController::class, 'form'])->name('login');
 Route::get('/logout', [AuthController::class, 'logout'])->name('auth.logout');
 Route::post('/login', [AuthController::class, 'login'])->name('auth.login');
 
-// Route::get('/', function () {
-//     return Inertia::render('Home');
-// });
 
 Route::middleware('auth:sanctum')->group(function () {
     Route::get('/', HomeController::class);
@@ -54,6 +52,7 @@ Route::middleware('auth:sanctum')->group(function () {
     Route::prefix('/system')->group(function () {
         Route::get('/', SystemController::class);
         Route::resource('/models', SystemModelController::class);
+        Route::get('/configs', [SystemConfigController::class, 'index']);
         Route::get('/commands', [SystemCommandController::class, 'index']);
         Route::get('/commands/{command_id}/run', [SystemCommandController::class, 'run']);
         Route::get('/commands/{command_id}', [SystemCommandController::class, 'show']);

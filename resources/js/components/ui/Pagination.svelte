@@ -35,7 +35,7 @@
 
 <style>
     nav {
-        @apply w-full flex justify-between items-center  px-2 font-medium;
+        @apply w-full flex justify-between items-center px-2 font-medium;
     }
     section {
         @apply py-2;

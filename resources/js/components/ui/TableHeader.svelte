@@ -1,3 +1,3 @@
-<thead class="bg-light dark:bg-dark {$$props.class}">
+<thead class=" {$$props.class}">
     <slot />
 </thead>

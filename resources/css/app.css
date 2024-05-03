@@ -14,6 +14,14 @@ header {
     @apply bg-normal dark:bg-dark;
 }
 
+thead {
+    @apply bg-normal dark:bg-dark;
+}
+
+tbody {
+    @apply bg-transparent;
+}
+
 nav.breadcrumb {
     @apply bg-normal bg-opacity-60 dark:bg-dark dark:bg-opacity-80;
 }
@@ -23,11 +31,11 @@ nav.main a {
 }
 
 nav.main .active {
-    @apply bg-dark text-lightest dark:bg-darkest  /*bg-[#aa0a2e]*/;
+    @apply bg-dark text-lightest dark:bg-darker  /*bg-[#aa0a2e]*/;
 }
 
 nav.pagination {
-    @apply bg-light dark:bg-dark;
+    @apply bg-normal dark:bg-dark;
 }
 
 form.search input {

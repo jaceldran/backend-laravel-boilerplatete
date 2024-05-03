@@ -15,25 +15,12 @@
         faRefresh,
     } from "@fortawesome/free-solid-svg-icons";
     import { dateFormat, isDate, jsonRender } from "@/utils.js";
+    import systemLinks from "@/routes/system/sections.js";
 
     export let commands;
     export let q;
 
-    const routes = [
-        { text: "Modelos", href: "/system/models", active: false },
-        {
-            text: "Comandos",
-            target: "_self",
-            href: "/system/commands",
-            active: true,
-        },
-        {
-            text: "Rutas",
-            target: "_blank",
-            href: "/request-docs",
-            active: false,
-        },
-    ];
+    const routes = systemLinks.setActive("commands").asArray();
 
     const runCommand = (commandName, commandId) => {
         if (confirm(`Ejecutar el comando "${commandName}"`)) {

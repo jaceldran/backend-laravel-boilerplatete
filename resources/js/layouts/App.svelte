@@ -15,7 +15,7 @@
 </script>
 
 <div class="layout {$colorScheme}">
-    <header class="">
+    <header>
         <a
             use:inertia
             href="/"
@@ -42,7 +42,7 @@
         <Breadcrumb links={breadcrumbLinks} />
     {/if}
 
-    <main class="container mx-auto pb-8 {$$props.class}">
+    <main class="container mx-auto px-4 pb-8 {$$props.class}">
         <FlashMessage />
         <slot />
     </main>

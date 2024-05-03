@@ -39,7 +39,7 @@
 <div class="grid grid-cols-4 w-full">
     {#each Object.entries(data) as [key, value]}
         <div
-            class="truncate p-2 border-b bg-normal dark:bg-dark dark:border-dark col-span-1"
+            class="truncate p-2 border-b bg-normal bg-opacity-85 dark:bg-dark dark:bg-opacity-40 dark:border-dark col-span-1"
         >
             {key}
         </div>
@@ -50,7 +50,7 @@
                 <div class="grid grid-cols-4">
                     {#each Object.entries(value) as [k, v]}
                         <div
-                            class="truncate p-2 border-b bg-normal dark:bg-dark dark:border-dark col-span-1"
+                            class="truncate p-2 border-b bg-normal bg-opacity-85 dark:bg-dark dark:bg-opacity-40 dark:border-dark col-span-1"
                         >
                             {k}
                         </div>

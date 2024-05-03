@@ -21,27 +21,13 @@
         faEye,
         faRefresh,
     } from "@fortawesome/free-solid-svg-icons";
-
     import { dateFormat, isDate, jsonRender } from "@/utils.js";
+    import systemLinks from "@/routes/system/sections.js";
 
     export let models;
     export let q;
 
-    const routes = [
-        { text: "Modelos", href: "/system/models", active: true },
-        {
-            text: "Comandos",
-            target: "_self",
-            href: "/system/commands",
-            active: false,
-        },
-        {
-            text: "Rutas",
-            target: "_blank",
-            href: "/request-docs",
-            active: false,
-        },
-    ];
+    const routes = systemLinks.setActive("models").asArray();
 
     // por alguna razón es más rápido abrir con location.href
     // que usando intertia, al parecer debido al tiempo que

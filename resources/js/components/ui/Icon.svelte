@@ -8,8 +8,8 @@
     export let hover;
     export let text;
 
-    // color = color || "text-normal";
-    // hover = hover || "hover:text-dark";
+    color = color || "text-lessdark";
+    hover = hover || "hover:text-normal";
 
     // Configurar FontAwesome
     // config.autoReplaceSvg = "nest";

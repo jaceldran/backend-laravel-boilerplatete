@@ -17,11 +17,11 @@ class EnrolmentController extends Controller
             ->orderBy('created_at', 'desc');
 
         if ($query = request('q', null)) {
-            $enrolments->searchInColumns($query, ['contact_email', 'product_id', 'data']);
+            $enrolments->searchInColumns($query, ['contact_email', 'product_id', 'data', 'sync_log']);
         }
 
         $data = [
-            'enrolments' => $enrolments->paginate(10),
+            'enrolments' => $enrolments->paginate(10)->withQueryString(),
             'query' => $query,
         ];
 
